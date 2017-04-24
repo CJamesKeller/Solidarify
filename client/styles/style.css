@@ -1,0 +1,46 @@
+.content:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+
+  background-image: url("images/SoloBackground7.png");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.content {
+  position: relative;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.login{
+  padding-top: 20px;
+  padding-right: 20px;
+  text-align: right;
+}
+
+.buffer{
+  height: 250px;
+}
+
+.search{
+  text-align: center;
+}
+
+.register{
+  padding-bottom: 20px;
+}

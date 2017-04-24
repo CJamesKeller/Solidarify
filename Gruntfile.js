@@ -30,6 +30,13 @@ module.exports = function(grunt){
               'angular.min.js.map'],
         dest: 'server/public/vendors/angular/'
       },
+      bootstrap: {
+        expand: true,
+        cwd: 'node_modules/bootstrap/dist/',
+        src: ['css/bootstrap.css',
+              'js/bootstrap.js'],
+        dest: 'server/public/vendors/bootstrap/'
+      },
       d3: {
         expand: true,
         cwd: 'node_modules/d3/build',
