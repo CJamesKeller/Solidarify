@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="styles/style.css">
     <script src="vendors/angular/angular.js" charset="utf-8"></script>
-    <script type="text/javascript" src="scripts/client.js">
-
-    </script>
+    <script type="text/javascript" src="scripts/client.js"></script>
     <title></title>
   </head>
   <body>
@@ -53,14 +51,12 @@
               placeholder="Email" value="">
             <input type="text" name="website"
               placeholder="Website" value="">
-            <p>
-              <div class="smallBuff">
-              </div>
-            </p>
-            <p>
-              <textarea cols="50" rows="10" name="description" required="required"
-                placeholder="Description" value=""></textarea>
-            </p>
+
+            <p><div class="smallBuff"></div></p>
+
+            <p><textarea cols="50" rows="10" name="description" required="required"
+                placeholder="Description" value=""></textarea></p>
+
             <button ng-click="registerVar = false" type="button" name="button" class="btn btn-lg btn-default">Submit</button>
           </form>
         </div>
