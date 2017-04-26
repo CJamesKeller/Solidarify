@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="myApp">
   <head>
     <meta charset="utf-8">
+    <!-- SOURCES -->
     <script src="vendors/jquery/jquery.min.js" charset="utf-8"></script>
     <script src="vendors/bootstrap/js/bootstrap.js" charset="utf-8"></script>
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="styles/style.css">
     <script src="vendors/angular/angular.js" charset="utf-8"></script>
     <script type="text/javascript" src="scripts/client.js"></script>
-    <title></title>
+    <title>Admin View</title>
   </head>
   <body>
     <div class="content row">
       <div class="wrapper">
         <h1 class="col-xs-12">ADMIN VIEW</h1>
+        <!-- SHOW CURRENT REQUESTS -->
         <div class="requests">
           <div class="thisRequest" ng-repeat="request in requestArray">
             <h4>{{request.name}}</h4>
@@ -22,6 +24,7 @@
           </div>
         </div>
 
+        <!-- SHOW ALL ORGANIZATIONS -->
         <div class="orgsCol col-xs-6">
           <h2>Organizations:</h2>
 
@@ -33,6 +36,7 @@
 
         </div>
 
+        <!-- SHOW ALL EVENTS -->
         <div class="eventsCol col-xs-6">
           <h2>Events:</h2>
           <!-- <div class="possibleCalendar">

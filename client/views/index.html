@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="myApp">
   <head>
     <meta charset="utf-8">
+    <!-- SOURCES -->
     <script src="vendors/jquery/jquery.min.js" charset="utf-8"></script>
     <script src="vendors/bootstrap/js/bootstrap.js" charset="utf-8"></script>
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="styles/style.css">
     <script src="vendors/angular/angular.js" charset="utf-8"></script>
     <script type="text/javascript" src="scripts/client.js"></script>
-    <title></title>
+    <title>Solidarify</title>
   </head>
   <body>
     <div class="content row">
       <div class="wrapper">
 
+        <!-- LOGIN BUTTON -->
         <div class="login col-xs-12">
           <div class="empty col-xs-10">
           </div>
@@ -25,6 +27,7 @@
         <div class="buffer col-xs-12">
         </div>
 
+        <!-- SEARCH BUTTON -->
         <div class="search col-xs-12">
           <div class="empty col-xs-5">
           </div>
@@ -38,6 +41,7 @@
         <div class="buffer col-xs-12">
         </div>
 
+        <!-- REGISTER BUTTON -->
         <div class="register col-xs-12">
           <button id="registerBtn" ng-click="registerVar = true" class="btn btn-lg btn-default" type="button" name="register">Register</button>
         </div>
