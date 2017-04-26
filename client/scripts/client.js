@@ -2,7 +2,7 @@ var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(['$routeProvider', function($routeProvider ) {
   $routeProvider
-    .when('/home', {
+    .when('/index', {
       templateUrl: '/views/home.html',
       controller: "LoginController",
     })
@@ -10,17 +10,17 @@ myApp.config(['$routeProvider', function($routeProvider ) {
       templateUrl: '/views/register.html',
       controller: "LoginController"
     })
-    .when('/user', {
-      templateUrl: '/views/user.html',
+    .when('/manage', {
+      templateUrl: '/views/manage.html',
       controller: "UserController",
-      resolve: {  //This calls getuser before going to the route
-        getuser : function(UserService){ //DON'T inject our own srvcs into config
+      resolve: {  //Calls getuser before going to route
+        getuser : function(UserService){
           return UserService.getuser();
         }
       }
     })
-    .when('/info', {
-      templateUrl: '/views/info.html',
+    .when('/search', {
+      templateUrl: '/views/search.html',
       controller: "InfoController",
       resolve: {
         getuser : function(UserService){

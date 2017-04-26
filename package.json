@@ -24,7 +24,7 @@
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
     "mongoose": "^4.9.6",
-    "node-mailer": "^0.1.1",
+    "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",

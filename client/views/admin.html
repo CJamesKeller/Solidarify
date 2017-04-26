@@ -1,57 +1,55 @@
-<!DOCTYPE html>
-<html ng-app="myApp">
-  <head>
-    <meta charset="utf-8">
-    <!-- SOURCES -->
-    <script src="vendors/jquery/jquery.min.js" charset="utf-8"></script>
-    <script src="vendors/bootstrap/js/bootstrap.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <script src="vendors/angular/angular.js" charset="utf-8"></script>
-    <script type="text/javascript" src="scripts/client.js"></script>
-    <title>Admin View</title>
-  </head>
-  <body>
-    <div class="content row">
-      <div class="wrapper">
-        <h1 class="col-xs-12">ADMIN VIEW</h1>
-        <!-- SHOW CURRENT REQUESTS -->
-        <div class="requests">
-          <div class="thisRequest" ng-repeat="request in requestArray">
-            <h4>{{request.name}}</h4>
-            <p>{{request.email}}</p>
-            <p>{{request.description}}</p>
-          </div>
-        </div>
-
-        <!-- SHOW ALL ORGANIZATIONS -->
-        <div class="orgsCol col-xs-6">
-          <h2>Organizations:</h2>
-
-          <div ng-repeat="org in orgsArray" class="thisOrg">
-            <span>{{org.name}}</span>
-            <span>{{org.email}}</span>
-            <span><button ng-click="deleteThis()" type="button" name="deleteOrg">DELETE</button></span>
-          </div>
-
-        </div>
-
-        <!-- SHOW ALL EVENTS -->
-        <div class="eventsCol col-xs-6">
-          <h2>Events:</h2>
-          <!-- <div class="possibleCalendar">
-            Possible Calendar?
-          </div> -->
-
-          <div ng-repeat="event in eventsArray" class="thisEvent">
-            <span>{{event.name}}</span>
-            <span>{{event.sponsorsArray}}</span>
-            <span><button ng-click="deleteThis()" type="button" name="deleteEvent">DELETE</button></span>
-          </div>
-
-        </div>
-
+<div class="content row container">
+  <div class="wrapper">
+    <h1 class="col-xs-12">ADMIN VIEW</h1>
+    <!-- SHOW CURRENT REQUESTS -->
+    <div class="requests">
+      <div class="thisRequest" ng-repeat="request in requestArray">
+        <h4>{{request.name}}</h4>
+        <p>{{request.email}}</p>
+        <p>{{request.description}}</p>
       </div>
     </div>
-  </body>
-</html>
+
+    <!-- EMAIL TO AN ORGANIZATION -->
+    <div ng-controller="MailController as mailer">
+        <form novalidate ng-submit="mailer.submitForm(mailer.mailObject)">
+          Send Email To:<br>
+          <input type="text" ng-model="mailer.mailObject.toEmail"><br>
+          Subject:<br>
+          <input type="text" ng-model="mailer.mailObject.subject"><br>
+          Message:<br>
+          <input type="text" ng-model="mailer.mailObject.message"><br>
+          <button>Submit</button><br>
+          <br>
+        </form>
+    </div>
+
+    <!-- SHOW ALL ORGANIZATIONS -->
+    <div class="orgsCol col-xs-6">
+      <h2>Organizations:</h2>
+
+      <div ng-repeat="org in orgsArray" class="thisOrg">
+        <span>{{org.name}}</span>
+        <span>{{org.email}}</span>
+        <span><button ng-click="deleteThis()" type="button" name="deleteOrg">DELETE</button></span>
+      </div>
+
+    </div>
+
+    <!-- SHOW ALL EVENTS -->
+    <div class="eventsCol col-xs-6">
+      <h2>Events:</h2>
+      <!-- <div class="possibleCalendar">
+        Possible Calendar?
+      </div> -->
+
+      <div ng-repeat="event in eventsArray" class="thisEvent">
+        <span>{{event.name}}</span>
+        <span>{{event.sponsorsArray}}</span>
+        <span><button ng-click="deleteThis()" type="button" name="deleteEvent">DELETE</button></span>
+      </div>
+
+    </div>
+
+  </div>
+</div>

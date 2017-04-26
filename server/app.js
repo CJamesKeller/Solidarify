@@ -3,6 +3,7 @@ var app = express();
 var path = require("path");
 var bodyParser = require("body-parser");
 var db = require("./modules/db.js");
+var nodemailer = require('nodemailer');
 
 app.set("port", (process.env.PORT || 5000));
 app.use(bodyParser.json());
@@ -41,5 +42,36 @@ app.use("/user", user);
 app.use("/*", index);
 //***
 //***PASSPORT***
+
+
+//***NODEMAILER***
+//***
+//Creates transporter using default SMTP
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: "", //EMAIL
+        pass: ""  //PASSWORD
+    }
+});
+//***
+app.post('/mail', function(req,res){
+    var mailer = req.body;
+    var mailOptions = {
+        from: ' "" ', // ' "NAME" EMAIL ' (w/single q's, too)
+        to: mailer.toEmail,
+        subject: mailer.subject,
+        text: mailer.message,
+        html: '<b>' + mailer.message + '</b>'
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            return console.log(error);
+        }
+    });
+    res.send(200);
+});
+//***
+//***NODEMAILER***
 
 module.exports = app;

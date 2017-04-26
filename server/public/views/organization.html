@@ -1,69 +1,52 @@
-<!DOCTYPE html>
-<html ng-app="myApp">
-  <head>
-    <meta charset="utf-8">
-    <!-- SOURCES -->
-    <script src="vendors/jquery/jquery.min.js" charset="utf-8"></script>
-    <script src="vendors/bootstrap/js/bootstrap.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <script src="vendors/angular/angular.js" charset="utf-8"></script>
-    <script type="text/javascript" src="scripts/client.js"></script>
-    <title>Management Portal</title>
-  </head>
-  <body>
-    <div class="content row">
-      <div class="wrapper">
-        <h1>MANAGEMENT PORTAL</h1>
+<div class="content row container">
+  <div class="wrapper">
+    <h1>MANAGEMENT PORTAL</h1>
 
-        <!-- EDIT ORG INFO -->
-        <div class="col-xs-8">
-          <form class="orgInfo" action="index.html" method="post">
-            <input ng-model="org.name" type="text" name="orgName" value="">
-            <input ng-model="org.email" type="text" name="orgEmail" value="">
-            <input type="checkbox" ng-click="showInfo = false"> hidden
-          </form>
+    <!-- EDIT ORG INFO -->
+    <div class="col-xs-8">
+      <form class="orgInfo" action="index.html" method="post">
+        <input ng-model="org.name" type="text" name="orgName" value="">
+        <input ng-model="org.email" type="text" name="orgEmail" value="">
+        <input type="checkbox" ng-click="showInfo = false"> hidden
+      </form>
 
-          <div class="col-xs-8">
-            <textarea name="name" rows="8" cols="80" ng-model="org.description"></textarea>
-          </div>
+      <div class="col-xs-8">
+        <textarea name="name" rows="8" cols="80" ng-model="org.description"></textarea>
+      </div>
 
-          <!-- CREATE NEW EVENT -->
-          <div class="col-xs-4">
-            <form class="newEvent" action="index.html" method="post">
-              <input type="text" name="newEventName" value=""
-                placeholder="Event name" ng-model="newEvent.name">
-              <input type="text" name="newEventTime" value=""
-                placeholder="Event time" ng-model="newEvent.time">
-              <input type="text" name="newEventSponsors" value=""
-                placeholder="Add Sponsors" ng-model="newEvent.sponsors">
-              <textarea name="newEventDescription" rows="8" cols="80"
-                placeholder="Describe your event" ng-model="newEvent.description"></textarea>
-              <button type="button" name="button" ng-click="addNewEvent()">Create!</button>
-            </form>
-          </div>
+      <!-- CREATE NEW EVENT -->
+      <div class="col-xs-4">
+        <form class="newEvent" action="index.html" method="post">
+          <input type="text" name="newEventName" value=""
+            placeholder="Event name" ng-model="newEvent.name">
+          <input type="text" name="newEventTime" value=""
+            placeholder="Event time" ng-model="newEvent.time">
+          <input type="text" name="newEventSponsors" value=""
+            placeholder="Add Sponsors" ng-model="newEvent.sponsors">
+          <textarea name="newEventDescription" rows="8" cols="80"
+            placeholder="Describe your event" ng-model="newEvent.description"></textarea>
+          <button type="button" name="button" ng-click="addNewEvent()">Create!</button>
+        </form>
+      </div>
 
-        </div>
+    </div>
 
-        <!-- DISPLAY ALL ORG EVENTS -->
-        <div class="col-xs-4">
-          <div class="imageAdder">
-          </div>
-          <div class="myEvents">
-            <div class="thisEvent" ng-repeat="event in eventsArray">
-              <div class="container">
-                <p>{{event.name}}</p>
-                <p>{{event.time}}</p>
-                <p>{{event.description}}</p>
-                <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>
-                <button type="button" name="button" ng-click="deleteEvent()">DELETE</button>
-              </div>
-            </div>
+    <!-- DISPLAY ALL ORG EVENTS -->
+    <div class="col-xs-4">
+      <div class="imageAdder">
+      </div>
+      <div class="myEvents">
+        <div class="thisEvent" ng-repeat="event in eventsArray">
+          <div class="container">
+            <p>{{event.name}}</p>
+            <p>{{event.time}}</p>
+            <p>{{event.description}}</p>
+            <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>
+            <button type="button" name="button" ng-click="deleteEvent()">DELETE</button>
           </div>
         </div>
-
       </div>
     </div>
 
-  </body>
-</html>
+  </div>
+</div>
