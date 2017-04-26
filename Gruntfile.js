@@ -30,6 +30,14 @@ module.exports = function(grunt){
               'angular.min.js.map'],
         dest: 'server/public/vendors/angular/'
       },
+      ngRoute: {
+        expand: true,
+        cwd: 'node_modules/angular-route/',
+        src: ['angular-route.js',
+              'angular-route.min.js',
+              'angular-route.min.js.map'],
+        dest: 'server/public/vendors/angular-route/'
+      },
       bootstrap: {
         expand: true,
         cwd: 'node_modules/bootstrap/dist/',
