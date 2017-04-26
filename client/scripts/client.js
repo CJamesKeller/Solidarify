@@ -1,5 +1,5 @@
 var myApp = angular.module('myApp', ['ngRoute']);
-
+console.log("client running");
 myApp.config(['$routeProvider', function($routeProvider ) {
   $routeProvider
     .when('/index', {
@@ -29,6 +29,6 @@ myApp.config(['$routeProvider', function($routeProvider ) {
       }
     })
     .otherwise({
-      redirectTo: 'home'
+      redirectTo: 'index'
     });
 }]);
