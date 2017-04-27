@@ -1,4 +1,4 @@
-myApp.controller('UserController', ['$scope', '$http', '$location', 'UserService', function($scope, $http, $location, UserService) {
+myApp.controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
   $scope.userObject = UserService.userObject;
   $scope.logout = UserService.logout;
 }]);

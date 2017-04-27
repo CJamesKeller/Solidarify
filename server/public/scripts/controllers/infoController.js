@@ -1,3 +1,3 @@
-myApp.controller('InfoController', ['$scope', '$http', '$location', 'UserService', function($scope, $http, $location, UserService) {
+myApp.controller('InfoController', ['$scope', 'UserService', function($scope, UserService) {
   $scope.logout = UserService.logout;
 }]);

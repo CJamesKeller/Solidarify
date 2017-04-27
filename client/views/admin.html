@@ -1,24 +1,27 @@
 <div class="content row container">
   <div class="wrapper">
     <h1 class="col-xs-12">ADMIN VIEW</h1>
+    <span><h1 id="welcome" class="lead">Welcome, {{userObject.userName}}!</h1></span>
+    <span><button class="btn btn-default" ng-click="logout()">Log Out</button></span>
+
     <!-- SHOW CURRENT REQUESTS -->
     <div class="requests">
-      <div class="thisRequest" ng-repeat="request in requestArray">
+      <div class="thisRequest" ng-repeat="request in newReqArray">
         <h4>{{request.name}}</h4>
         <p>{{request.email}}</p>
-        <p>{{request.description}}</p>
+        <p>{{request.desc}}</p>
       </div>
     </div>
 
     <!-- EMAIL TO AN ORGANIZATION -->
-    <div ng-controller="MailController as mailer">
-        <form novalidate ng-submit="mailer.submitForm(mailer.mailObject)">
+    <div>
+        <form novalidate ng-submit="submitForm(mailObject)">
           Send Email To:<br>
-          <input type="text" ng-model="mailer.mailObject.toEmail"><br>
+          <input type="text" ng-model="mailObject.toEmail"><br>
           Subject:<br>
-          <input type="text" ng-model="mailer.mailObject.subject"><br>
+          <input type="text" ng-model="mailObject.subject"><br>
           Message:<br>
-          <input type="text" ng-model="mailer.mailObject.message"><br>
+          <input type="text" ng-model="mailObject.message"><br>
           <button>Submit</button><br>
           <br>
         </form>
