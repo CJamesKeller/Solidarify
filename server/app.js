@@ -5,6 +5,10 @@ var bodyParser = require("body-parser");
 var db = require("./modules/db.js");
 var nodemailer = require('nodemailer');
 
+var requests = require("./routes/requests.js");
+var organizations = require("./routes/organizations.js");
+var events = require("./routes/events.js");
+
 app.set("port", (process.env.PORT || 5000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -12,6 +16,10 @@ app.use(express.static("server/public"));
 app.get("/", function(req, res){
   res.sendFile(path.resolve("server/public/views/index.html"));
 });
+
+app.use("/requests", requests);
+app.use("/organizations", organizations);
+app.use("/events", events);
 
 app.listen(app.get("port"), function(){
     console.log("Listening on port: ", app.get("port"));
