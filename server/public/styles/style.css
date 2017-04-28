@@ -1,3 +1,4 @@
+/*FORMAT BACKGROUND IMAGE*/
 .content:before {
   content: "";
   position: fixed;
@@ -17,7 +18,6 @@
   -ms-filter: blur(5px);
   filter: blur(5px);
 }
-
 .content {
   position: relative;
   left: 0;
@@ -27,39 +27,37 @@
   margin-right: 20px;
 }
 
+/*BUTTONS*/
 .login{
   padding-top: 20px;
   padding-right: 20px;
   text-align: right;
 }
-
-.buffer{
-  height: 250px;
+.logout{
+  text-align: right;
+  padding: 20px;
 }
-
 .search{
   text-align: center;
 }
-
 .register{
   padding-bottom: 20px;
 }
 
+/*ORG-REQUESTS FORMATTING*/
 .thisRequest{
   background: rgba(128, 128, 128, 0.4);
   padding: 10px;
 }
-
 .reqWrap{
   padding: 10px;
 }
-
 .blackText{
   padding-right: 10px;
   font-weight: bold;
 }
 
-.logout{
-  text-align: right;
-  padding: 20px;
+/*FUNCTIONAL*/
+.buffer{
+  height: 250px;
 }

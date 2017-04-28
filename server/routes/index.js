@@ -1,14 +1,14 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var passport = require('passport');
-var path = require('path');
+var passport = require("passport");
+var path = require("path");
 
 //Handles login form POST from index
-router.post('/',
+router.post("/",
 //local points to login method
-    passport.authenticate('local', {
-        successRedirect: '/user',   // goes to routes/user.js
-        failureRedirect: '/'        // goes to get '/' route below
+    passport.authenticate("local", {
+        successRedirect: "/user",   // goes to routes/user.js
+        failureRedirect: "/"        // goes to get "/" route below
     })
 );
 

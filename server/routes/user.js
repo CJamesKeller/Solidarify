@@ -1,9 +1,9 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var passport = require('passport');
-var path = require('path');
+var passport = require("passport");
+var path = require("path");
 
-router.get('/', function(req, res) {
+router.get("/", function(req, res) {
   // check if logged in
   if(req.isAuthenticated()) {
     // send back user object
@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 });
 
 // clear all session information for this user
-router.get('/logout', function(req, res) {
+router.get("/logout", function(req, res) {
   // Use built-in log-out method
   req.logOut();
   res.sendStatus(200);

@@ -1,17 +1,17 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module("myApp", ["ngRoute"]);
 console.log("client running");
-myApp.config(['$routeProvider', function($routeProvider ) {
+myApp.config(["$routeProvider", function($routeProvider ) {
   $routeProvider
-    .when('/index', {
-      templateUrl: '/views/home.html',
+    .when("/index", {
+      templateUrl: "/views/home.html",
       controller: "HomeController",
     })
-    .when('/register', {
-      templateUrl: '/views/register.html',
+    .when("/register", {
+      templateUrl: "/views/register.html",
       controller: "RegisterController"
     })
-    .when('/admin', {
-      templateUrl: '/views/admin.html',
+    .when("/admin", {
+      templateUrl: "/views/admin.html",
       controller: "AdminController"
       // resolve: {  //Calls getuser before going to route
       //   getuser : function(UserService){
@@ -19,15 +19,15 @@ myApp.config(['$routeProvider', function($routeProvider ) {
       //   }
       // }
     })
-    .when('/org', {
-      templateUrl: '/views/organization.html',
+    .when("/org", {
+      templateUrl: "/views/organization.html",
       controller: "OrgController"
     })
-    // .when('/search', {
-    //   templateUrl: '/views/search.html',
+    // .when("/search", {
+    //   templateUrl: "/views/search.html",
     //   controller: "SearchController"
     // })
     .otherwise({
-      redirectTo: 'index'
+      redirectTo: "index"
     });
 }]);

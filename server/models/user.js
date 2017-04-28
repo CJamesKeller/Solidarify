@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt');
+var bcrypt = require("bcrypt");
 var SALT_WORK_FACTOR = 10;
 
 var UserSchema = new Schema({
@@ -8,10 +8,10 @@ var UserSchema = new Schema({
     password: {type: String, required: true}
 });
 
-UserSchema.pre('save', function(next) { //"next" is an optional third param
+UserSchema.pre("save", function(next) { //"next" is an optional third param
     var user = this;                    //  made available by node & express
 
-    if(!user.isModified('password')) {
+    if(!user.isModified("password")) {
       return next();
     }
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
@@ -29,7 +29,7 @@ UserSchema.pre('save', function(next) { //"next" is an optional third param
 });
 
 UserSchema.methods.comparePassword = function(candidatePassword, callback) {
-    // 'this' refers to instance of User model
+    // "this" refers to instance of User model
     // "callback" refers to entire function in userStrategy
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
         if(err) {
@@ -39,4 +39,4 @@ UserSchema.methods.comparePassword = function(candidatePassword, callback) {
     });
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
