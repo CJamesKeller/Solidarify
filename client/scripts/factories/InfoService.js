@@ -1,20 +1,25 @@
-$http.get('/route').then(function(response) {
+myApp.factory("InfoService", ["$http", function($http){
 
-  $location.path("/home");
-});
+//ORGANIZATIONS
+  $http.get('/organizations').then(function(response) {
 
-$http.post('/routeIfAny', whatPosted).then(function(response) {
+    $location.path("/home");
+  });
 
-    $location.path('/newRoute');
-});
+  $http.post('/organizations', whatPosted).then(function(response) {
 
+      $location.path('/newRoute');
+  });
 
-$http.get('/route').then(function(response) {
+//EVENTS
+  $http.get('/events').then(function(response) {
 
-  $location.path("/home");
-});
+    $location.path("/home");
+  });
 
-$http.post('/routeIfAny', whatPosted).then(function(response) {
+  $http.post('/events', whatPosted).then(function(response) {
 
-    $location.path('/newRoute');
-});
+      $location.path('/newRoute');
+  });
+
+}]);

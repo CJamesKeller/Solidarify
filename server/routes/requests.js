@@ -12,7 +12,7 @@ var RequestSchema = mongoose.Schema({
 var Requests = mongoose.model("Requests", RequestSchema);
 
 router.get("/", function(req, res){
-  Requests.find({}, function(err, allRequests){ //{key: value}
+  Requests.find({}, function(err, allRequests){
     if(err){
       console.log(err);
       res.sendStatus(500);
@@ -23,9 +23,9 @@ router.get("/", function(req, res){
   });
 });
 
-router.post("/add", function(req, res){
+router.post("/", function(req, res){
   console.log("request post function");
-
+  var time1 = Date.now();
   var request = new Requests();
   request.id = req.body.id;
   request.name = req.body.name;
@@ -38,12 +38,14 @@ router.post("/add", function(req, res){
       res.sendStatus(500);
     }
     else{
+      var time2 = Date.now();
+      console.log("Here Scott: "+":"+ time1+":"+ time2);
       res.send(savedRequest);
     }
   });
 });
 
-router.delete("/delete/:id", function(req, res){
+router.delete("/:id", function(req, res){
   var id = req.params.id;
   Requests.findByIdAndRemove(id, function(err, deletedRequest){
     if(err){
@@ -51,6 +53,7 @@ router.delete("/delete/:id", function(req, res){
       res.sendStatus(500);
     }
     else{
+      console.log("delete success");
       res.send(deletedRequest);
     }
   });

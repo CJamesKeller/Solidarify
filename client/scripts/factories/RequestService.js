@@ -1,23 +1,34 @@
-myApp.factory("RequestService", [function(){
+myApp.factory("RequestService", ["$http", "$location", function($http, $location){
 
-newReqArray = [];
 newRequest = function(newReqObj){
-  newReqArray.push(newReqObj);
-  console.log(newReqArray);
+  $http.post('/requests', newReqObj).then(function(response){
+      $location.path('/home');
+  });
 };
 
-$http.get('/route').then(function(response) {
+var allReqs = {
+  reqArray: []
+};
 
-  $location.path("/home");
-});
+getReqs = function(){
+  $http.get('/requests').then(function(response){
+    allReqs.reqArray = response.data;
+    return allReqs;
+  });
+};
 
-$http.post('/routeIfAny', whatPosted).then(function(response) {
-  
-    $location.path('/newRoute');
-});
+deleteReq = function(reqID){
+  var id = reqID;
+  $http.delete('/requests/' + id).then(function(response){
+    $location.path('/admin');
+  });
+};
 
   return{
     newRequest: newRequest,
-    newReqArray: newReqArray
+    getReqs:    getReqs,
+    allReqs:    allReqs,
+    deleteReq: deleteReq
   };
+
 }]);

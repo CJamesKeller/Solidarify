@@ -1,20 +1,26 @@
 <div class="content row container">
   <div class="wrapper">
-    <h1 class="col-xs-12">ADMIN VIEW</h1>
-    <span><h1 id="welcome" class="lead">Welcome, {{userObject.userName}}!</h1></span>
-    <span><button class="btn btn-default" ng-click="logout()">Log Out</button></span>
+    <h1 class="col-xs-6">ADMIN VIEW</h1>
+    <div class="col-xs-6 logout"><button class="btn btn-default" ng-click="logout()">Log Out</button></div>
+    <h1 id="welcome" class="col-xs-12 lead">Welcome, {{userObject.userName}}!</h1>
 
     <!-- SHOW CURRENT REQUESTS -->
-    <div class="requests">
-      <div class="thisRequest" ng-repeat="request in newReqArray">
-        <h4>{{request.name}}</h4>
-        <p>{{request.email}}</p>
-        <p>{{request.desc}}</p>
+    <div class="requests col-xs-12">
+      <h2>PENDING REQUESTS:</h2>
+      <div class="reqWrap col-xs-4" ng-repeat="request in allReqs">
+        <div class="thisRequest">
+          <h4><span class="blackText">Name:</span>{{request.name}}</h4>
+          <p><span class="blackText">Email:</span>{{request.email}}</p>
+          <p><span class="blackText">Website:</span>{{request.site}}</p>
+          <p><span class="blackText">Description:</span>{{request.desc}}</p>
+          <button class="btn btn-sm btn-default" ng-click="deleteReq(request._id)"
+            type="button" name="button">DELETE</button>
+        </div>
       </div>
     </div>
 
     <!-- EMAIL TO AN ORGANIZATION -->
-    <div>
+    <div class="col-xs-12">
         <form novalidate ng-submit="submitForm(mailObject)">
           Send Email To:<br>
           <input type="text" ng-model="mailObject.toEmail"><br>

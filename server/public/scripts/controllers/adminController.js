@@ -1,8 +1,14 @@
-myApp.controller('AdminController', ['$scope', '$http', '$location', 'LoginService', "RequestService", "MailService", function($scope, $http, $location, LoginService, RequestService, MailService) {
+myApp.controller('AdminController',
+  ['$scope', '$http', '$location', 'LoginService', "RequestService",
+  "MailService", function($scope, $http, $location, LoginService,
+  RequestService, MailService) {
+
+// "InfoService",
   //Still need Info
 
-  $scope.newRequest = RequestService.newRequest;
-  $scope.newReqArray = RequestService.newReqArray;
+  RequestService.getReqs();
+  $scope.allReqs = RequestService.allReqs.reqArray;
+  $scope.deleteReq = RequestService.deleteReq;
 
   var mailer = this;
   mailer.submitForm = function(info){

@@ -44,3 +44,22 @@
 .register{
   padding-bottom: 20px;
 }
+
+.thisRequest{
+  background: rgba(128, 128, 128, 0.4);
+  padding: 10px;
+}
+
+.reqWrap{
+  padding: 10px;
+}
+
+.blackText{
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.logout{
+  text-align: right;
+  padding: 20px;
+}

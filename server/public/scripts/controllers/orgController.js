@@ -1,4 +1,7 @@
-myApp.controller('OrgController', ['$scope', '$http', '$location', 'LoginService', "MailService", function($scope, $http, $location, LoginService, MailService) {
+myApp.controller('OrgController',
+['$scope', '$http', '$location', 'LoginService', "MailService", "InfoService",
+function($scope, $http, $location, LoginService, MailService, InfoService) {
+
   //Still need Info
 
   var mailer = this;

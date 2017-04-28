@@ -1,4 +1,7 @@
-myApp.controller('HomeController', ['$scope', '$http', '$location', 'LoginService', "RequestService", function($scope, $http, $location, LoginService, RequestService) {
+myApp.controller('HomeController',
+  ['$scope', '$http', '$location', 'LoginService', "RequestService",
+  function($scope, $http, $location, LoginService, RequestService) {
+    
   $scope.newRequest = RequestService.newRequest;
   $scope.newReqArray = RequestService.newReqArray;
 
