@@ -20,6 +20,7 @@
     </div>
 
     <!-- EMAIL TO AN ORGANIZATION -->
+    <!-- ***NOT YET AUTO-POPULATED*** -->
     <div class="col-xs-12">
         <form novalidate ng-submit="submitForm(mailObject)">
           Send Email To:<br>
@@ -37,10 +38,13 @@
     <div class="orgsCol col-xs-6">
       <h2>Organizations:</h2>
 
-      <div ng-repeat="org in orgsArray" class="thisOrg">
+      <div ng-repeat="org in allOrgs" class="thisOrg">
         <span>{{org.name}}</span>
         <span>{{org.email}}</span>
-        <span><button ng-click="deleteThis()" type="button" name="deleteOrg">DELETE</button></span>
+        <span>{{org.site}}</span>
+        <span>{{org.desc}}</span>
+        <span><button ng-click="deleteOrg(org._id)" type="button"
+          name="deleteOrg">DELETE</button></span>
       </div>
 
     </div>
@@ -52,10 +56,13 @@
         Possible Calendar?
       </div> -->
 
-      <div ng-repeat="event in eventsArray" class="thisEvent">
+      <div ng-repeat="event in allEvents" class="thisEvent">
         <span>{{event.name}}</span>
-        <span>{{event.sponsorsArray}}</span>
-        <span><button ng-click="deleteThis()" type="button" name="deleteEvent">DELETE</button></span>
+        <span>{{event.time}}</span>
+        <span>{{event.desc}}</span>
+        <span>{{event.orgs}}</span>
+        <span><button ng-click="deleteEvent(event._id)" type="button"
+          name="deleteEvent">DELETE</button></span>
       </div>
 
     </div>

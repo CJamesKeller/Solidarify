@@ -3,8 +3,34 @@ myApp.controller("AdminController",
   "MailService", function($scope, $http, $location, LoginService,
   RequestService, MailService) {
 
-// "InfoService",
-  //Still need Info
+  //INFO FUNCTIONALITY
+
+  // thisEvent = {
+  //   name    : String,
+  //   time    : Date,
+  //   desc    : String,
+  //   creator : String,
+  //   orgs    : Array
+  // };
+  // thisOrg = {
+  //   name  :  String,
+  //   email :  String,
+  //   site  :  String,
+  //   desc  :  String
+  // };
+
+    //ORGANIZATIONS
+  InfoService.getOrgs();
+  $scope.newOrg = InfoService.newOrg;
+  $scope.allOrgs = InfoService.allOrgs.orgArray;
+  $scope.editOrg = InfoService.editOrg;
+  $scope.deleteOrg = InfoService.deleteOrg;
+    //EVENTS
+  InfoService.getEvents();
+  $scope.newEvent = InfoService.newEvent;
+  $scope.allEvents = InfoService.allEvents.eventArray;
+  $scope.editEvent = InfoService.editEvent;
+  $scope.deleteEvent = InfoService.deleteEvent;
 
   //ORG-REQUEST FUNCTIONALITY
   RequestService.getReqs();

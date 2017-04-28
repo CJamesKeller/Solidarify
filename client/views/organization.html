@@ -5,16 +5,18 @@
     <span><button class="btn btn-default" ng-click="logout()">Log Out</button></span>
 
     <!-- EDIT ORG INFO -->
+    <!-- ***NOT YET WORKING*** -->
     <div class="col-xs-8">
       <form class="orgInfo" action="index.html" method="post">
         <input ng-model="org.name" type="text" name="orgName" value="">
+        <input ng-model="org.site" type="text" name="orgSite" value="">
         <input ng-model="org.email" type="text" name="orgEmail" value="">
         <input type="checkbox" ng-click="showInfo = false"> hidden
+        <div class="col-xs-8">
+          <textarea name="name" rows="8" cols="80" ng-model="org.description"></textarea>
+        </div>
+        <button type="button" name="button" ng-click="editOrg(org)">SUBMIT</button>
       </form>
-
-      <div class="col-xs-8">
-        <textarea name="name" rows="8" cols="80" ng-model="org.description"></textarea>
-      </div>
 
       <!-- CREATE NEW EVENT -->
       <div class="col-xs-4">
@@ -24,10 +26,10 @@
           <input type="text" name="newEventTime" value=""
             placeholder="Event time" ng-model="newEvent.time">
           <input type="text" name="newEventSponsors" value=""
-            placeholder="Add Sponsors" ng-model="newEvent.sponsors">
+            placeholder="Add Sponsors" ng-model="newEvent.orgs">
           <textarea name="newEventDescription" rows="8" cols="80"
             placeholder="Describe your event" ng-model="newEvent.description"></textarea>
-          <button type="button" name="button" ng-click="addNewEvent()">Create!</button>
+          <button type="button" name="button" ng-click="addNewEvent(org)">Create!</button>
         </form>
       </div>
 
@@ -38,13 +40,15 @@
       <div class="imageAdder">
       </div>
       <div class="myEvents">
-        <div class="thisEvent" ng-repeat="event in eventsArray">
+        <div class="thisEvent" ng-repeat="event in allEvents">
           <div class="container">
             <p>{{event.name}}</p>
             <p>{{event.time}}</p>
+            <p>{{event.orgs}}</p>
             <p>{{event.description}}</p>
+            <!-- ***EDIT HERE NOT YET WORKING*** -->
             <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>
-            <button type="button" name="button" ng-click="deleteEvent()">DELETE</button>
+            <button type="button" name="button" ng-click="deleteEvent(event._id)">DELETE</button>
           </div>
         </div>
       </div>
