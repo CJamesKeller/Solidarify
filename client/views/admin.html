@@ -6,7 +6,7 @@
 
     <!-- SHOW CURRENT REQUESTS -->
     <div class="requests col-xs-12">
-      <h2>PENDING REQUESTS:</h2>
+      <h3>PENDING REQUESTS:</h3>
       <div class="reqWrap col-xs-4" ng-repeat="request in allReqs">
         <div class="thisRequest">
           <h4><span class="blackText">Name:</span>{{request.name}}</h4>
@@ -22,6 +22,7 @@
     <!-- EMAIL TO AN ORGANIZATION -->
     <!-- ***NOT YET AUTO-POPULATED*** -->
     <div class="col-xs-12">
+      <h2>Send Email:</h2>
         <form novalidate ng-submit="submitForm(mailObject)">
           Send Email To:<br>
           <input type="text" ng-model="mailObject.toEmail"><br>

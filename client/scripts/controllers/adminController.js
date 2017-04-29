@@ -1,7 +1,12 @@
 myApp.controller("AdminController",
   ["$scope", "$http", "$location", "LoginService", "RequestService",
-  "MailService", function($scope, $http, $location, LoginService,
-  RequestService, MailService) {
+  "MailService", "InfoService", function($scope, $http, $location, LoginService,
+  RequestService, MailService, InfoService) {
+
+  //ORG-REQUEST FUNCTIONALITY
+  RequestService.getReqs();
+  $scope.allReqs = RequestService.allReqs.reqArray;
+  $scope.deleteReq = RequestService.deleteReq;
 
   //INFO FUNCTIONALITY
 
@@ -31,11 +36,6 @@ myApp.controller("AdminController",
   $scope.allEvents = InfoService.allEvents.eventArray;
   $scope.editEvent = InfoService.editEvent;
   $scope.deleteEvent = InfoService.deleteEvent;
-
-  //ORG-REQUEST FUNCTIONALITY
-  RequestService.getReqs();
-  $scope.allReqs = RequestService.allReqs.reqArray;
-  $scope.deleteReq = RequestService.deleteReq;
 
   //MAILER FUNCTIONALITY
   var mailer = this;
