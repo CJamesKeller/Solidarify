@@ -1,3 +1,8 @@
+/**
+* @fileoverview Functionality for pages handling Event & Organization data.
+* @author Christopher Keller
+*/
+
 myApp.factory("InfoService", ["$http", function($http){
 
 //ORGANIZATIONS

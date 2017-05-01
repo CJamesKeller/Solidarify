@@ -1,3 +1,8 @@
+/**
+* @fileoverview Routes pages w/ resolves as applicable.
+* @author Christopher Keller
+*/
+
 var myApp = angular.module("myApp", ["ngRoute"]);
 console.log("client running");
 myApp.config(["$routeProvider", function($routeProvider ) {
@@ -13,11 +18,11 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     .when("/admin", {
       templateUrl: "/views/admin.html",
       controller: "AdminController"
-      // resolve: {  //Calls getuser before going to route
-      //   getuser : function(UserService){
-      //     return UserService.getuser();
+      // resolve: {  //Calls getReqs before going to route
+      //   getReqs : function(RequestService){
+      //     return RequestService.getReqs();
       //   }
-      // }
+      // }    //Enabling this resolve causes home page to not load
     })
     .when("/org", {
       templateUrl: "/views/organization.html",

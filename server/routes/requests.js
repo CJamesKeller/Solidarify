@@ -1,3 +1,8 @@
+/**
+* @fileoverview Handles CRUD for organization Requests to join site.
+* @author Christopher Keller
+*/
+
 //BASIC REQUIRES
 var express = require("Express");
 var router = express.Router();

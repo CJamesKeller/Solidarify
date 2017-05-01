@@ -1,3 +1,8 @@
+/**
+* @fileoverview Handles CRUD for Organizations.
+* @author Christopher Keller
+*/
+
 //BASIC REQUIRES
 var express = require("Express");
 var router = express.Router();

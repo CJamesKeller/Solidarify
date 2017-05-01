@@ -1,3 +1,8 @@
+/**
+* @fileoverview Server for Solidarify website w/ Nodemailer and Passport.
+* @author Christopher Keller
+*/
+
 //BASIC REQUIRES
 var express = require("express");
 var app = express();
