@@ -5,7 +5,7 @@ myApp.controller("AdminController",
 
   //ORG-REQUEST FUNCTIONALITY
   RequestService.getReqs();
-  $scope.allReqs = RequestService.allReqs.reqArray;
+  $scope.allReqs = RequestService.allReqs;
   $scope.deleteReq = RequestService.deleteReq;
 
   //INFO FUNCTIONALITY

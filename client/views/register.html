@@ -2,7 +2,7 @@
   <h1 class="lead">Register User</h1>
   <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
 
-  <form ng-submit="registerUser()">
+  <form ng-submit="user.type = 'register'; registerUser()">
     <div>
         <label for="username">Username:</label>
         <input type="text" ng-model="user.username" />
@@ -14,5 +14,12 @@
     <input class="btn btn-default" type="submit" name="submit" value="Register" />
     <a href="#home">Cancel</a>
   </form>
-  
+
+  <div class="fromNEV">
+    <p>
+      <input id="email-resend" type="text" placeholder="Email" ng-model="emailResend">
+      <button ng-click="resend(emailResend)">Resend Verification Email</button>
+    </p>
+  </div>
+
 </div>

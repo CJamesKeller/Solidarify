@@ -43,4 +43,12 @@ myApp.controller("RegisterController", ["$scope", "$http", "$location", "LoginSe
       });
     }
   };
+
+  $scope.resend = function(emailResend) {
+    $http.post("/register", emailResend).then(function(response) {
+      console.log("success");
+      $location.path("/home");
+    });
+  };
+
 }]);

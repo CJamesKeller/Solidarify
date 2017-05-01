@@ -2,11 +2,12 @@
 
 //Add to Schema for Users:
 isAdmin: { type: Boolean, default: false } //But how to make true?
+                                           //Hard-code one in!
 
 //Middleware modification:
 var requiresAdmin = function(){
   return[
-          ensureLoggedIn('/login'), //"ensureLoggedIn" must be replaced...
+          ensureLoggedIn('/login'), //"ensureLoggedIn" is unneeded...?
           function(req, res, next) {
             if (req.user && req.user.isAdmin === true)
               next();
