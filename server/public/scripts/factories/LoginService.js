@@ -1,17 +1,18 @@
-myApp.factory("LoginService", ["$http", "$location", function($http, $location){
+myApp.factory("LoginService", ["$http", "$location", function($http, $location) {
 
-  var userObject = {};
+  let userObject = {};
 
   return {
     userObject : userObject,
 
-    getuser : function(){
+    getuser : function() {
       $http.get("/user").then(function(response) {
-          if(response.data.username) {
+          if ( response.data.username ) {
               // user has a curret session on the server
               userObject.userName = response.data.username;
               console.log("User Data: ", userObject.userName);
-          } else {
+          }
+          else {
               // user has no session, bounce them back to the login page
               $location.path("/home");
           }

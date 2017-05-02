@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
-var passport = require("passport");
-var path = require("path");
+let express = require("express"),
+    router = express.Router(),
+    passport = require("passport"),
+    path = require("path");
 
 //Handles login form POST from index
 router.post("/",
@@ -13,7 +13,7 @@ router.post("/",
 );
 
 //Catches any request not caught
-router.get("/", function(req, res){
+router.get("/", function(req, res) {
   res.sendFile(path.resolve("server/public/views/index.html"));
 });
 

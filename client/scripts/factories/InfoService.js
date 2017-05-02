@@ -3,71 +3,71 @@
 * @author Christopher Keller
 */
 
-myApp.factory("InfoService", ["$http", function($http){
+myApp.factory("InfoService", ["$http", function($http) {
 
 //ORGANIZATIONS
-newOrg = function(newOrgObj){
-  $http.post("/organizations", newOrgObj).then(function(response){
+newOrg = function(newOrgObj) {
+  $http.post("/organizations", newOrgObj).then(function(response) {
       $location.path("/home"); //??? ??? ???
   });
 };
 
-var allOrgs = {
+let allOrgs = {
   orgArray: []
 };
-getOrgs = function(){
-  $http.get("/organizations").then(function(response){
+getOrgs = function() {
+  $http.get("/organizations").then(function(response) {
     allOrgs.orgArray = response.data;
     return allOrgs;
   });
 };
 
-editOrg = function(orgID){ //THIS STILL NEEDS TO BE FIXED
-  var id = orgID;
-  $http.put("/organizations/" + id).then(function(response){
+editOrg = function(orgID) { //THIS STILL NEEDS TO BE FIXED
+  let id = orgID;
+  $http.put("/organizations/" + id).then(function(response) {
     $location.path("/admin"); //??? ??? ???
   });
 };
 
-deleteOrg = function(orgID){
-  var id = orgID;
-  $http.delete("/organizations/" + id).then(function(response){
+deleteOrg = function(orgID) {
+  let id = orgID;
+  $http.delete("/organizations/" + id).then(function(response) {
     $location.path("/admin"); //??? ??? ???
   });
 };
 
 //EVENTS
-newEvent = function(newEventObj){
-  $http.post("/events", newEventObj).then(function(response){
+newEvent = function(newEventObj) {
+  $http.post("/events", newEventObj).then(function(response) {
       $location.path("/home"); //??? ??? ???
   });
 };
 
-var allEvents = {
+let allEvents = {
   eventArray: []
 };
-getEvents = function(){
-  $http.get("/events").then(function(response){
+getEvents = function() {
+  $http.get("/events").then(function(response) {
     allEvents.eventArray = response.data;
     return allEvents;
   });
 };
 
-editEvent = function(eventID){ //THIS STILL NEEDS TO BE FIXED
-  var id = eventID;
-  $http.put("/events/" + id).then(function(response){
+editEvent = function(eventID) { //THIS STILL NEEDS TO BE FIXED
+  let id = eventID;
+  $http.put("/events/" + id).then(function(response) {
     $location.path("/admin"); //??? ??? ???
   });
 };
 
-deleteEvent = function(eventID){
-  var id = eventID;
-  $http.delete("/events/" + id).then(function(response){
+deleteEvent = function(eventID) {
+  let id = eventID;
+  $http.delete("/events/" + id).then(function(response) {
     $location.path("/admin"); //??? ??? ???
   });
 };
 
-  return{
+  return {
     newOrg : newOrg,
     newEvent : newEvent,
     getOrgs : getOrgs,

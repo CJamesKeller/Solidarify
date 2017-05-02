@@ -1,14 +1,15 @@
-var express = require("express");
-var router = express.Router();
-var passport = require("passport");
-var path = require("path");
+let express = require("express"),
+    router = express.Router(),
+    passport = require("passport"),
+    path = require("path");
 
 router.get("/", function(req, res) {
   // check if logged in
-  if(req.isAuthenticated()) {
+  if ( req.isAuthenticated() ) {
     // send back user object
     res.send(req.user);
-  } else {
+  }
+  else {
     // failure best handled on the server. do redirect here.
     res.send(false);
   }

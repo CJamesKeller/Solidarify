@@ -10,17 +10,19 @@ myApp.controller("RegisterController", ["$scope", "$http", "$location", "LoginSe
   $scope.message = "";
 
   $scope.login = function() {
-    if($scope.user.username === "" || $scope.user.password === "") {
+    if ( $scope.user.username === "" || $scope.user.password === "" ) {
       $scope.message = "Enter your username and password!";
-    } else {
+    }
+    else {
       console.log("sending to server...", $scope.user);
       $http.post("/", $scope.user).then(function(response) {
-        if(response.data.username) {
+        if ( response.data.username ) {
           console.log("success: ", response.data);
           // location works with SPA (ng-route)
           console.log("redirecting to user page");
           $location.path("/user"); //angular service managing redirects
-        } else {
+        }
+        else {
           console.log("failure: ", response);
           $scope.message = "Wrong!!";
         }
@@ -29,9 +31,10 @@ myApp.controller("RegisterController", ["$scope", "$http", "$location", "LoginSe
   };
 
   $scope.registerUser = function() {
-    if($scope.user.username === "" || $scope.user.password === "") {
+    if ( $scope.user.username === "" || $scope.user.password === "" ) {
       $scope.message = "Choose a username and password!";
-    } else {
+    }
+    else {
       console.log("sending to server...", $scope.user);
       $http.post("/register", $scope.user).then(function(response) {
         console.log("success");

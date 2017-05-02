@@ -4,58 +4,58 @@
 */
 
 //BASIC REQUIRES
-var express = require("Express");
-var router = express.Router();
-var mongoose = require("mongoose");
+let express = require("Express"),
+    router = express.Router(),
+    mongoose = require("mongoose");
 
 //REQUEST SCHEMA
-var RequestSchema = mongoose.Schema({
+let RequestSchema = mongoose.Schema({
   name  :  String,
   email :  String,
   site  :  String,
   desc  :  String
 });
-var Requests = mongoose.model("Requests", RequestSchema);
+let Requests = mongoose.model("Requests", RequestSchema);
 
 //CRUD ROUTES (GET, POST, DELETE -- NO UPDATE)
-router.get("/", function(req, res){
-  Requests.find({}, function(err, allRequests){
-    if(err){
+router.get("/", function(req, res) {
+  Requests.find({}, function(err, allRequests) {
+    if ( err ) {
       console.log(err);
       res.sendStatus(500);
     }
-    else{
+    else {
       res.send(allRequests);
     }
   });
 });
 
-router.post("/", function(req, res){
-  var request = new Requests();
+router.post("/", function(req, res) {
+  let request = new Requests();
   request.id    = req.body.id;
   request.name  = req.body.name;
   request.email = req.body.email;
   request.site  = req.body.site;
   request.desc  = req.body.desc;
-  request.save(function(err, savedRequest){
-    if(err){
+  request.save(function(err, savedRequest) {
+    if ( err ) {
       console.log(err);
       res.sendStatus(500);
     }
-    else{
+    else {
       res.send(savedRequest);
     }
   });
 });
 
-router.delete("/:id", function(req, res){
-  var id = req.params.id;
-  Requests.findByIdAndRemove(id, function(err, deletedRequest){
-    if(err){
+router.delete("/:id", function(req, res) {
+  let id = req.params.id;
+  Requests.findByIdAndRemove(id, function(err, deletedRequest) {
+    if ( err ) {
       console.log(err);
       res.sendStatus(500);
     }
-    else{
+    else {
       res.send(deletedRequest);
     }
   });

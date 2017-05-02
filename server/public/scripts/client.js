@@ -2,9 +2,8 @@
 * @fileoverview Routes pages w/ resolves as applicable.
 * @author Christopher Keller
 */
+let myApp = angular.module("myApp", ["ngRoute"]);
 
-var myApp = angular.module("myApp", ["ngRoute"]);
-console.log("client running");
 myApp.config(["$routeProvider", function($routeProvider ) {
   $routeProvider
     .when("/index", {
@@ -22,7 +21,7 @@ myApp.config(["$routeProvider", function($routeProvider ) {
       //   getReqs : function(RequestService){
       //     return RequestService.getReqs();
       //   }
-      // }    //Enabling this resolve causes home page to not load
+      // }    //Enabling this resolve causes home page to not load (?)
     })
     .when("/org", {
       templateUrl: "/views/organization.html",

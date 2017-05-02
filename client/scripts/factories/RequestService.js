@@ -3,39 +3,39 @@
 * @author Christopher Keller
 */
 
-myApp.factory("RequestService", ["$http", "$location", function($http, $location){
+myApp.factory("RequestService", ["$http", "$location", function($http, $location) {
 
 /**
 * @param {object} newReqObj The complete info submitted via form on home page.
 */
-newRequest = function(newReqObj){
-  $http.post("/requests", newReqObj).then(function(response){
+newRequest = function(newReqObj) {
+  $http.post("/requests", newReqObj).then(function(response) {
       $location.path("/home");
   });
 };
 
-var allReqs = {
+let allReqs = {
   reqArray: []
 };
 
 /**
-* @returns {object} allReqs containing array of all current Requests.
+* @returns {object} allReqs, containing array of all current Requests.
 */
-getReqs = function(){
-  $http.get("/requests").then(function(response){
+getReqs = function() {
+  $http.get("/requests").then(function(response) {
     allReqs.reqArray = response.data;
     return allReqs;
   });
 };
 
-deleteReq = function(reqID){
-  var id = reqID;
-  $http.delete("/requests/" + id).then(function(response){
+deleteReq = function(reqID) {
+  let id = reqID;
+  $http.delete("/requests/" + id).then(function(response) {
     $location.path("/admin");
   });
 };
 
-  return{
+  return {
     newRequest: newRequest,
     getReqs:    getReqs,
     allReqs:    allReqs,
