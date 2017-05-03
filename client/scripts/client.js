@@ -16,12 +16,12 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     })
     .when("/admin", {
       templateUrl: "/views/admin.html",
-      controller: "AdminController"
-      // resolve: {  //Calls getReqs before going to route
-      //   getReqs : function(RequestService){
-      //     return RequestService.getReqs();
-      //   }
-      // }    //Enabling this resolve causes home page to not load (?)
+      controller: "AdminController",
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
     })
     .when("/org", {
       templateUrl: "/views/organization.html",

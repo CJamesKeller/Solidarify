@@ -28,6 +28,9 @@ UserSchema.pre("save", function(next) { //"next" is an optional third param
     });
 });
 
+/**
+ * @param {string} candidatePassword The password to be compared with database.
+ */
 UserSchema.methods.comparePassword = function(candidatePassword, callback) {
     // "this" refers to instance of User model
     // "callback" refers to entire function in userStrategy

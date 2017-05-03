@@ -33,6 +33,9 @@ function($scope, $http, $location, LoginService, MailService, InfoService) {
 
   //MAILER FUNCTIONALITY
   let mailer = this;
+  /**
+   * @param {object} info Contains the message to send to the admin.
+   */
   mailer.submitForm = function(info) {
       MailService.sendEmail(info);
   };

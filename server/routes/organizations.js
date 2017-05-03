@@ -18,6 +18,9 @@ let OrgSchema = mongoose.Schema({
 let Organizations = mongoose.model("Organizations", OrgSchema);
 
 //CRUD ROUTES (GET, POST, PUT, DELETE)
+/**
+ * @returns {object} Contains all organization objects.
+ */
 router.get("/", function(req, res) {
   Organizations.find({}, function(err, allOrganizations) { //{key: value}
     if ( err ) {
@@ -30,6 +33,9 @@ router.get("/", function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The saved organization.
+ */
 router.post("/add", function(req, res) {
   let thisOrg = new Organizations();
   thisOrg.id    = req.body.id;
@@ -48,6 +54,9 @@ router.post("/add", function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The updated organization.
+ */
 router.put("/edit/:id", function(req, res) {
   let id = req.params.id;
   Organizations.findById(req.params.id, function(err, updatedOrg) {
@@ -73,6 +82,9 @@ router.put("/edit/:id", function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The deleted organization.
+ */
 router.delete("/delete/:id", function(req, res){
   let id = req.params.id;
   Organizations.findByIdAndRemove(id, function(err, deletedOrg) {

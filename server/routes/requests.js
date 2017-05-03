@@ -18,6 +18,9 @@ let RequestSchema = mongoose.Schema({
 let Requests = mongoose.model("Requests", RequestSchema);
 
 //CRUD ROUTES (GET, POST, DELETE -- NO UPDATE)
+/**
+ * @returns {object} Contains all request objects.
+ */
 router.get("/", function(req, res) {
   Requests.find({}, function(err, allRequests) {
     if ( err ) {
@@ -30,6 +33,9 @@ router.get("/", function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The saved request.
+ */
 router.post("/", function(req, res) {
   let request = new Requests();
   request.id    = req.body.id;
@@ -48,6 +54,9 @@ router.post("/", function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The deleted request.
+ */
 router.delete("/:id", function(req, res) {
   let id = req.params.id;
   Requests.findByIdAndRemove(id, function(err, deletedRequest) {

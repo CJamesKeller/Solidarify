@@ -39,6 +39,9 @@ myApp.controller("AdminController",
 
   //MAILER FUNCTIONALITY
   let mailer = this;
+  /**
+   * @param {object} info Contains the email address and message to be sent.
+   */
   mailer.submitForm = function(info) {
       MailService.sendEmail(info);
   };

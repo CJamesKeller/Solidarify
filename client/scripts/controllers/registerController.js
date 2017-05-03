@@ -47,6 +47,9 @@ myApp.controller("RegisterController", ["$scope", "$http", "$location", "LoginSe
     }
   };
 
+  /**
+   * @param {string} emailResend The email address for resending verification to.
+   */
   $scope.resend = function(emailResend) {
     $http.post("/register", emailResend).then(function(response) {
       console.log("success");

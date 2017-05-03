@@ -1,3 +1,5 @@
+//*** FIX COMMENTS ***
+
 let passport = require("passport"),
     localStrategy = require("passport-local").Strategy,
     User = require("../models/user");

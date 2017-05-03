@@ -19,6 +19,9 @@ let EventSchema = mongoose.Schema({
 let Events = mongoose.model("Events", EventSchema);
 
 //CRUD ROUTES (GET, POST, PUT, DELETE)
+/**
+ * @returns {object} Contains all event objects.
+ */
 router.get("/", function(req, res) {
   Events.find({}, function(err, allEvents) { //{key: value}
     if ( err ) {
@@ -31,6 +34,9 @@ router.get("/", function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The saved event.
+ */
 router.post("/add", function(req, res) {
   let thisEvent = new Events();
   thisEvent.id      = req.body.id;
@@ -50,6 +56,9 @@ router.post("/add", function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The updated event.
+ */
 router.put("/edit/:id", function(req, res) {
   let id = req.params.id;
   Events.findById(req.params.id, function(err, updatedEvent) {
@@ -76,6 +85,9 @@ router.put("/edit/:id", function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The deleted event.
+ */
 router.delete("/delete/:id", function(req, res) {
   let id = req.params.id;
   Events.findByIdAndRemove(id, function(err, deletedEvent) {
