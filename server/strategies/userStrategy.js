@@ -8,7 +8,6 @@ let passport = require("passport"),
 // Only runs at authentication
 // Stores info on req.session.passport.user
 passport.serializeUser(function(user, done) {
-  console.log("serialized: ", user);
   done(null, user.id);
 });
 

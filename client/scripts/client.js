@@ -12,20 +12,30 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     })
     .when("/register", {
       templateUrl: "/views/register.html",
-      controller: "RegisterController"
+      controller: "RegisterController",
+      // resolve: {
+      //   getuser : function(LoginService) {    //ONLY IF TOKEN MATCHES
+      //     return LoginService.getuser();
+      //   }
+      // }
     })
     .when("/admin", {
       templateUrl: "/views/admin.html",
       controller: "AdminController",
       resolve: {
-        getuser : function(UserService){
-          return UserService.getuser();
+        isAdmin : function(LoginService) {
+          return LoginService.isAdmin();
         }
       }
     })
     .when("/org", {
       templateUrl: "/views/organization.html",
-      controller: "OrgController"
+      controller: "OrgController",
+      // resolve: {
+      //   getuser : function(LoginService) {    //SEND TO THEIR OWN PAGE
+      //     return LoginService.getuser();
+      //   }
+      // }
     })
     // .when("/search", {
     //   templateUrl: "/views/search.html",

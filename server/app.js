@@ -21,6 +21,7 @@ let express = require("express"),
     user = require("./routes/user"),
     index = require("./routes/index"),
     //MY PROJECT ROUTES
+    configVars = require("../config.json"),
     requests = require("./routes/requests.js"),
     organizations = require("./routes/organizations.js"),
     events = require("./routes/events.js");
@@ -32,7 +33,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("server/public"));
 
 //***PASSPORT***
-//**************
 app.use(session({
    secret:  "secret",
    key:     "user", // this is the name of the req.variable.
@@ -40,27 +40,23 @@ app.use(session({
    cookie:  { maxage: 60000, secure: false },
    saveUninitialized: false
 }));
-//***
 app.use(passport.initialize());
 app.use(passport.session());
-//**************
-//***PASSPORT***
 
 //***NODEMAILER***
-//****************
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "", //EMAIL
-        pass: ""  //PASSWORD
+        user: configVars.emailAddress, //EMAIL
+        pass: configVars.password  //PASSWORD
     }
 });
-//***
 app.post("/mail", function(req,res) {
     let mailer = req.body;
     console.log(mailer);
     let mailOptions = {
-        from:     ' "" ', // Formatted as: ' "NAME" EMAIL ' (w/single q's, too)
+        // Formatted as: ' "NAME" EMAIL ' (w/single q's, too)
+        from:     ' "Solidarify Admin" ' + configVars.emailAddress + ' ',
         to:       mailer.toEmail,
         subject:  mailer.subject,
         text:     mailer.message,
@@ -73,8 +69,6 @@ app.post("/mail", function(req,res) {
     });
     res.send(200);
 });
-//****************
-//***NODEMAILER***
 
 //PROJECT ROUTES
 app.use("/requests", requests);

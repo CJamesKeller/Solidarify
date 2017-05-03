@@ -9,7 +9,7 @@
     <div class="container" ng-show="loginVar">
       <h1 class="lead">Login</h1>
         <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
-        <form ng-submit="login()">
+        <form>
           <div>
               <label for="username">Username:</label>
               <input type="text" ng-model="user.username" />
@@ -18,7 +18,7 @@
               <label for="password">Password:</label>
               <input type="password" ng-model="user.password" />
           </div>
-          <button ng-click="loginVar = false" type="button" name="loginButton" class="btn btn-lg btn-default">Submit</button>
+          <button ng-click="login(); loginVar = false" type="button" name="loginButton" class="btn btn-lg btn-default">Submit</button>
         </form>
     </div>
 

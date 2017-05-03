@@ -5,7 +5,7 @@ myApp.factory("MailService", ["$http", function($http) {
      */
     sendEmail: function(info) {
       $http.post("/mail", info).then(function(response) {
-        console.log("Email has been sent: ", response.data);
+        alert("Email successfully sent!");
       });
     }
   };

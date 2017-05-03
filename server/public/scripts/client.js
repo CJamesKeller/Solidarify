@@ -12,20 +12,30 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     })
     .when("/register", {
       templateUrl: "/views/register.html",
-      controller: "RegisterController"
+      controller: "RegisterController",
+      // resolve: {
+      //   getuser : function(LoginService) {    //ONLY IF TOKEN MATCHES
+      //     return LoginService.getuser();
+      //   }
+      // }
     })
     .when("/admin", {
       templateUrl: "/views/admin.html",
-      controller: "AdminController"
-      // resolve: {  //Calls getReqs before going to route
-      //   getReqs : function(RequestService){
-      //     return RequestService.getReqs();
-      //   }
-      // }    //Enabling this resolve causes home page to not load (?)
+      controller: "AdminController",
+      resolve: {
+        isAdmin : function(LoginService) {
+          return LoginService.isAdmin();
+        }
+      }
     })
     .when("/org", {
       templateUrl: "/views/organization.html",
-      controller: "OrgController"
+      controller: "OrgController",
+      // resolve: {
+      //   getuser : function(LoginService) {    //SEND TO THEIR OWN PAGE
+      //     return LoginService.getuser();
+      //   }
+      // }
     })
     // .when("/search", {
     //   templateUrl: "/views/search.html",
