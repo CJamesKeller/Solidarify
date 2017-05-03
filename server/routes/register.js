@@ -1,8 +1,8 @@
-let express = require("express"),
-    router = express.Router(),
-    passport = require("passport"),
-    Users = require("../models/user"),
-    path = require("path");
+let express   = require("express"),
+    router    = express.Router(),
+    passport  = require("passport"),
+    Users     = require("../models/user"),
+    path      = require("path");
 
 // Handles request for HTML file
 router.get("/", function(req, res) {

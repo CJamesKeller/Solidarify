@@ -7,11 +7,11 @@ let myApp = angular.module("myApp", ["ngRoute"]);
 myApp.config(["$routeProvider", function($routeProvider ) {
   $routeProvider
     .when("/index", {
-      templateUrl: "/views/home.html",
+      templateUrl: "/views/templates/home.html",
       controller: "HomeController",
     })
     .when("/register", {
-      templateUrl: "/views/register.html",
+      templateUrl: "/views/templates/register.html",
       controller: "RegisterController",
       // resolve: {
       //   getuser : function(LoginService) {    //ONLY IF TOKEN MATCHES
@@ -20,7 +20,7 @@ myApp.config(["$routeProvider", function($routeProvider ) {
       // }
     })
     .when("/admin", {
-      templateUrl: "/views/admin.html",
+      templateUrl: "/views/templates/admin.html",
       controller: "AdminController",
       resolve: {
         isAdmin : function(LoginService) {
@@ -29,7 +29,7 @@ myApp.config(["$routeProvider", function($routeProvider ) {
       }
     })
     .when("/org", {
-      templateUrl: "/views/organization.html",
+      templateUrl: "/views/templates/organization.html",
       controller: "OrgController",
       // resolve: {
       //   getuser : function(LoginService) {    //SEND TO THEIR OWN PAGE
@@ -38,9 +38,19 @@ myApp.config(["$routeProvider", function($routeProvider ) {
       // }
     })
     // .when("/search", {
-    //   templateUrl: "/views/search.html",
+    //   templateUrl: "/views/templates/search.html",
     //   controller: "SearchController"
     // })
+    // Accept a route with an activation code as a parameter
+    .when('/activate/:code', {
+      templateUrl: '/views/templates/activate.html',
+      controller: 'ActivateController',
+      resolve: {
+        getuser : ['UserService', function(UserService){
+          return UserService.getuser();
+        }]
+      }
+    })
     .otherwise({
       redirectTo: "index"
     });

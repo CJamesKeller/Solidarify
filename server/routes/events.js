@@ -4,9 +4,9 @@
 */
 
 //BASIC REQUIRES
-let express = require("Express"),
-    router = express.Router(),
-    mongoose = require("mongoose");
+let express   = require("Express"),
+    router    = express.Router(),
+    mongoose  = require("mongoose");
 
 //EVENT SCHEMA
 let EventSchema = mongoose.Schema({

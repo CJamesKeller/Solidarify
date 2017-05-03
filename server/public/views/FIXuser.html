@@ -1,0 +1,19 @@
+<div class="container">
+    <div ng-include="'views/partials/nav.html'"></div>
+    <h1 id="welcome" class="lead">Welcome, {{userObject.userName}}!</h1>
+    <!-- *********** -->
+    <!-- THIS IS NEW -->
+    <!-- *********** -->
+    <input type="text" ng-model="newGroup.name">
+    <button class="btn btn-default" ng-click="createGroup(newGroup.name)">Create Group</button>
+
+    <button class="btn btn-default" ng-click="logout()">Log Out</button>
+
+    <div ng-repeat="group in groups.data">
+      {{group.name}}: <a href="{{baseURL + '/#/activate/' + group.code}}">{{baseURL + '/#/activate/' + group.code}}</a>
+      <span ng-if="group.users.indexOf(userObject.id) !== -1">
+          <!-- code to render a large video block-->
+          <strong>Joined!</strong>
+      </span>
+    </div>
+</div>

@@ -22,27 +22,15 @@ myApp.controller("HomeController",
     }
     else {
       $http.post("/", $scope.user).then(function(response) {
-        if ( response.data.username ) {
-          // location works with SPA (ng-route)
-          $location.path("/user"); //angular service managing redirects
+        if ( response.data.username === "chrisMaster" ) {
+          $location.path("/admin");
+        }
+        else if ( response.data.username ) {
+          $location.path("/home");
         }
         else {
           $scope.message = "Wrong!!";
         }
-      });
-    }
-  };
-
-  $scope.registerUser = function() {
-    if ( $scope.user.username === "" || $scope.user.password === "" ) {
-      $scope.message = "Choose a username and password!";
-    }
-    else {
-      $http.post("/register", $scope.user).then(function(response) {
-        $location.path("/home");
-      },
-      function(response) {
-        $scope.message = "Please try again.";
       });
     }
   };

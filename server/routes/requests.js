@@ -4,16 +4,16 @@
 */
 
 //BASIC REQUIRES
-let express = require("Express"),
-    router = express.Router(),
-    mongoose = require("mongoose");
+let express   = require("Express"),
+    router    = express.Router(),
+    mongoose  = require("mongoose");
 
 //REQUEST SCHEMA
 let RequestSchema = mongoose.Schema({
-  name  :  String,
-  email :  String,
-  site  :  String,
-  desc  :  String
+  name  : String,
+  email : String,
+  site  : String,
+  desc  : String
 });
 let Requests = mongoose.model("Requests", RequestSchema);
 

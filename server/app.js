@@ -6,25 +6,25 @@
 //REQUIRES:
 //*********
     //INITIAL
-let express = require("express"),
-    app = express(),
-    path = require("path"),
-    bodyParser = require("body-parser"),
-    db = require("./modules/db.js"),
+let express       = require("express"),
+    app           = express(),
+    path          = require("path"),
+    bodyParser    = require("body-parser"),
+    db            = require("./modules/db.js"),
     //NODEMAILER
-    nodemailer = require("nodemailer"),
+    nodemailer    = require("nodemailer"),
     //PASSPORT
-    passport = require("./strategies/userStrategy"),
-    session = require("express-session"),
+    passport      = require("./strategies/userStrategy"),
+    session       = require("express-session"),
     //PASSPORT ROUTES
-    register = require("./routes/register"),
-    user = require("./routes/user"),
-    index = require("./routes/index"),
+    register      = require("./routes/register"),
+    user          = require("./routes/user"),
+    index         = require("./routes/index"),
     //MY PROJECT ROUTES
-    configVars = require("../config.json"),
-    requests = require("./routes/requests.js"),
+    configVars    = require("../config.json"),
+    requests      = require("./routes/requests.js"),
     organizations = require("./routes/organizations.js"),
-    events = require("./routes/events.js");
+    events        = require("./routes/events.js");
 
 //APP INITIALIZATION
 app.set("port", (process.env.PORT || 5000));
@@ -49,6 +49,7 @@ let transporter = nodemailer.createTransport({
     auth: {
         user: configVars.emailAddress, //EMAIL
         pass: configVars.password  //PASSWORD
+        //*** process.env.MAILPASS || *** FOR HEROKU
     }
 });
 app.post("/mail", function(req,res) {

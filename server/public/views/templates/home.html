@@ -1,0 +1,68 @@
+<div class="content row container">
+  <div class="wrapper">
+
+    <!-- LOGIN BUTTON -->
+    <div class="login col-xs-12">
+      <button class="btn btn-lg btn-default" ng-click="loginVar = true" type="button" name="login">Log In</button>
+    </div>
+    <!-- LOGIN FORM -->
+    <div class="container" ng-show="loginVar">
+      <h1 class="lead">Login</h1>
+        <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
+        <form>
+          <div>
+              <label for="username">Username:</label>
+              <input type="text" ng-model="user.username" />
+          </div>
+          <div>
+              <label for="password">Password:</label>
+              <input type="password" ng-model="user.password" />
+          </div>
+          <button ng-click="login(); loginVar = false" type="button" name="loginButton" class="btn btn-lg btn-default">Submit</button>
+        </form>
+    </div>
+
+    <div class="buffer col-xs-12">
+    </div>
+
+    <!-- SEARCH BUTTON -->
+    <div class="search col-xs-12">
+      <div class="empty col-xs-5">
+      </div>
+      <div class="col-xs-2">
+        <button class="btn btn-lg btn-default" type="button" name="search">Search</button>
+      </div>
+      <div class="empty col-xs-5">
+      </div>
+    </div>
+
+    <div class="buffer col-xs-12">
+    </div>
+
+    <!-- REGISTER BUTTON -->
+      <div class="register col-xs-12">
+        <button id="registerBtn" ng-click="registerVar = true" class="btn btn-lg btn-default" type="button" name="register">Register</button>
+      </div>
+      <!-- REGISTER FORM -->
+      <div ng-show="registerVar" class="ng-cloak registrationForm col-xs-12">
+        <form class="registration" action="index.html" method="post">
+          <h3>Request To Join Solidarify</h3>
+          <input type="text" name="orgName" required="required"
+            placeholder="Organization Name" ng-model="newReqObj.name" value="">
+          <input type="text" name="email" required="required"
+            placeholder="Email" ng-model="newReqObj.email" value="">
+          <input type="text" name="website"
+            placeholder="Website" ng-model="newReqObj.site" value="">
+
+          <p><div class="smallBuff"></div></p>
+
+          <p><textarea cols="50" rows="10" name="description" required="required"
+              placeholder="Description" ng-model="newReqObj.desc" value=""></textarea></p>
+
+          <button ng-click="newRequest(newReqObj); registerVar = false" type="button"
+            name="registerButton" class="btn btn-lg btn-default">Submit</button>
+        </form>
+      </div>
+
+  </div>
+</div>

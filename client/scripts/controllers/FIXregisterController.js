@@ -1,4 +1,6 @@
-myApp.controller("RegisterController", ["$scope", "$http", "$location", "LoginService", function($scope, $http, $location, LoginService) {
+myApp.controller("RegisterController",
+  ["$scope", "$http", "$location", "LoginService", "UserService",
+  function($scope, $http, $location, LoginService, UserService) {
 
   $scope.userObject = LoginService.userObject;
   $scope.logout = LoginService.logout;
@@ -9,29 +11,18 @@ myApp.controller("RegisterController", ["$scope", "$http", "$location", "LoginSe
   };
   $scope.message = "";
 
-  $scope.login = function() {
-    if ( $scope.user.username === "" || $scope.user.password === "" ) {
-      $scope.message = "Enter your username and password!";
-    }
-    else {
-      $http.post("/", $scope.user).then(function(response) {
-        if ( response.data.username ) {
-          // location works with SPA (ng-route)
-          $location.path("/user"); //angular service managing redirects
-        }
-        else {
-          $scope.message = "Wrong!!";
-        }
-      });
-    }
-  };
-
   $scope.registerUser = function() {
     if ( $scope.user.username === "" || $scope.user.password === "" ) {
       $scope.message = "Choose a username and password!";
     }
     else {
       $http.post("/register", $scope.user).then(function(response) {
+        if ( UserService.code.tempCode !== undefined ) {
+          $location.path('/activate/' + UserService.code.tempCode);
+        }
+        else {
+          $location.path('/user');
+        }
         $location.path("/home");
       },
       function(response) {
@@ -48,5 +39,11 @@ myApp.controller("RegisterController", ["$scope", "$http", "$location", "LoginSe
       $location.path("/home");
     });
   };
+
+  $scope.newGroup = {};
+  $scope.createGroup = UserService.createGroup;
+  $scope.groups = UserService.groups;
+  UserService.getGroups();
+  $scope.baseURL = $location.$$protocol + '://' + $location.$$host + ':' + $location.$$port;
 
 }]);

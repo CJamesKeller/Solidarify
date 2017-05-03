@@ -14,7 +14,10 @@
           <p><span class="blackText">Website:</span>{{request.site}}</p>
           <p><span class="blackText">Description:</span>{{request.desc}}</p>
           <button class="btn btn-sm btn-default" ng-click="deleteReq(request._id)"
-            type="button" name="button">DELETE</button>
+            type="button" name="deleteButton">DELETE</button>
+          <button class="btn btn-sm btn-default"
+            ng-click="createGroup(request.email); deleteReq(request._id)" type="button" 
+            name="inviteButton">INVITE</button>
         </div>
       </div>
     </div>

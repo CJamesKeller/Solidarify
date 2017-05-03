@@ -1,8 +1,8 @@
 //*** FIX COMMENTS ***
 
-let passport = require("passport"),
+let passport      = require("passport"),
     localStrategy = require("passport-local").Strategy,
-    User = require("../models/user");
+    User          = require("../models/user");
 
 // Store user's unique id in session
 // Only runs at authentication

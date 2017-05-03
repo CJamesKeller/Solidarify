@@ -4,16 +4,16 @@
 */
 
 //BASIC REQUIRES
-let express = require("Express"),
-    router = express.Router(),
-    mongoose = require("mongoose");
+let express   = require("Express"),
+    router    = express.Router(),
+    mongoose  = require("mongoose");
 
 //ORGANIZATION SCHEMA
 let OrgSchema = mongoose.Schema({
-  name  :  String,
-  email :  String,
-  site  :  String,
-  desc  :  String
+  name  : String,
+  email : String,
+  site  : String,
+  desc  : String
 });
 let Organizations = mongoose.model("Organizations", OrgSchema);
 
@@ -65,10 +65,10 @@ router.put("/edit/:id", function(req, res) {
       res.sendStatus(500);
     }
     else {
-      updatedOrg.name   =   req.body.name   ||  updatedOrg.name;
-      updatedOrg.email  =   req.body.email  ||  updatedOrg.email;
-      updatedOrg.site   =   req.body.site   ||  updatedOrg.site;
-      updatedOrg.desc   =   req.body.desc   ||  updatedOrg.desc;
+      updatedOrg.name   = req.body.name   || updatedOrg.name;
+      updatedOrg.email  = req.body.email  || updatedOrg.email;
+      updatedOrg.site   = req.body.site   || updatedOrg.site;
+      updatedOrg.desc   = req.body.desc   || updatedOrg.desc;
       updatedOrg.save(function(err, updatedOrg) {
         if ( err ) {
           console.log(err);

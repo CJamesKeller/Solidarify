@@ -1,0 +1,87 @@
+<div class="content row container">
+  <div class="wrapper">
+    <h1>MANAGEMENT PORTAL</h1>
+    <span class="col-xs-10"><h1 id="welcome" class="lead">Welcome, {{userObject.userName}}!</h1></span>
+    <span class="col-xs-2"><button class="btn btn-default" ng-click="logout()">Log Out</button></span>
+
+    <div class="row">
+      <!-- EDIT ORG INFO -->
+      <!-- ***NOT YET WORKING*** -->
+      <div class="col-xs-4">
+        <h2>Edit your info:</h2>
+        <form class="orgInfo" action="index.html" method="post">
+          <div>
+            <span class="blackText">Name:</span>
+            <input ng-model="org.name" type="text" name="orgName" value="">
+          </div>
+          <div>
+            <span class="blackText">Site:</span>
+            <input ng-model="org.site" type="text" name="orgSite" value="">
+          </div>
+          <div>
+            <span class="blackText">Email:</span>
+            <input ng-model="org.email" type="text" name="orgEmail" value="">
+            <input type="checkbox" ng-click="showInfo = false"> hidden
+          </div>
+          <div>
+            <span class="blackText">Description:</span>
+          </div>
+          <div>
+            <textarea name="name" rows="8" cols="40" ng-model="org.description"></textarea>
+          </div>
+          <button type="button" name="button" ng-click="editOrg(org)">Save</button>
+        </form>
+      </div>
+
+      <!-- CREATE NEW EVENT -->
+      <div class="col-xs-4">
+        <h2>Create a new event!</h2>
+        <form class="newEvent" action="index.html" method="post">
+          <div>
+            <span class="blackText">Name:</span>
+            <input type="text" name="newEventName" value=""
+              placeholder="Event name" ng-model="newEvent.name">
+        <!-- ***THE ABOVE ISN'T WORKING RIGHT*** -->
+          </div>
+          <div>
+            <span class="blackText">Time:</span>
+            <input type="text" name="newEventTime" value=""
+              placeholder="Event time" ng-model="newEvent.time">
+          </div>
+          <div>
+            <span class="blackText">Sponsors:</span>
+            <input type="text" name="newEventSponsors" value=""
+              placeholder="Add Sponsors" ng-model="newEvent.orgs">
+          </div>
+          <div>
+            <span class="blackText">Description:</span>
+            <textarea name="newEventDescription" rows="8" cols="40"
+              placeholder="Describe your event" ng-model="newEvent.description"></textarea>
+          </div>
+          <button type="button" name="button" ng-click="addNewEvent(org)">Create!</button>
+        </form>
+      </div>
+
+      <!-- DISPLAY ALL ORG EVENTS -->
+      <div class="col-xs-4">
+        <div class="imageAdder">
+        </div>
+        <div class="myEvents">
+          <div class="thisEvent" ng-repeat="event in allEvents">
+            <div class="container">
+              <span class="blackText">Name:</span><p>{{event.name}}</p>
+              <span class="blackText">Time:</span><p>{{event.time}}</p>
+              <span class="blackText">Sponsors:</span><p>{{event.orgs}}</p>
+              <span class="blackText">Description:</span><p>{{event.description}}</p>
+              <!-- ***EDIT HERE NOT YET WORKING*** -->
+              <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>
+              <button type="button" name="button" ng-click="deleteEvent(event._id)">DELETE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

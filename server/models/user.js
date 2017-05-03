@@ -1,12 +1,11 @@
-let mongoose = require("mongoose"),
-    Schema = mongoose.Schema,
-    bcrypt = require("bcrypt"),
-    SALT_WORK_FACTOR = 10;
-
-let UserSchema = new Schema({
-    username: {type: String, required: true, index: {unique: true}},
-    password: {type: String, required: true}
-});
+let mongoose          = require("mongoose"),
+    Schema            = mongoose.Schema,
+    bcrypt            = require("bcrypt"),
+    SALT_WORK_FACTOR  = 10,
+    UserSchema        = new Schema({
+                          username: {type: String, required: true, index: {unique: true}},
+                          password: {type: String, required: true}
+                        });
 
 UserSchema.pre("save", function(next) { //"next" is an optional third param
     let user = this;                    //  made available by node & express

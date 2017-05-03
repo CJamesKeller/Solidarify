@@ -34,4 +34,18 @@ myApp.controller("HomeController",
       });
     }
   };
+
+  $scope.registerUser = function() {
+    if ( $scope.user.username === "" || $scope.user.password === "" ) {
+      $scope.message = "Choose a username and password!";
+    }
+    else {
+      $http.post("/register", $scope.user).then(function(response) {
+        $location.path("/home");
+      },
+      function(response) {
+        $scope.message = "Please try again.";
+      });
+    }
+  };
 }]);

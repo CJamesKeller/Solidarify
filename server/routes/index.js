@@ -1,7 +1,7 @@
-let express = require("express"),
-    router = express.Router(),
-    passport = require("passport"),
-    path = require("path");
+let express   = require("express"),
+    router    = express.Router(),
+    passport  = require("passport"),
+    path      = require("path");
 
 //Handles login form POST from index
 router.post("/",
