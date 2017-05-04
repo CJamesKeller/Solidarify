@@ -24,7 +24,8 @@ let express       = require("express"),
     configVars    = require("../config.json"),
     requests      = require("./routes/requests.js"),
     organizations = require("./routes/organizations.js"),
-    events        = require("./routes/events.js");
+    events        = require("./routes/events.js"),
+    permission    = require("./routes/permission.js");
 
 //APP INITIALIZATION
 app.set("port", (process.env.PORT || 5000));
@@ -77,6 +78,7 @@ app.use("/organizations", organizations);
 app.use("/events", events);
 app.use("/register", register);
 app.use("/user", user);
+app.use("/permission", permission);
 app.use("/*", index);
 
 //INDEX GET ROUTE

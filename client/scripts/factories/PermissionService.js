@@ -22,6 +22,18 @@ myApp.factory('UserService',
   };
 
   /**
+   * @param {object} user The organization confirming collaboration.
+   * @param {string} permissionCode The verification of permission.
+   */
+  collaborate = function(permissionCode) {
+    $http.put('/permission/collaborate/' + permissionCode )
+    .then(function(response) {
+      code.tempCode = undefined;
+      return response;
+    });
+  };
+
+  /**
    * @returns {object} The new invitation.
    */
   createInvite = function() {

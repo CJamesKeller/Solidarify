@@ -66,11 +66,12 @@
           <div>
             <span class="blackText">Description:</span>
             <textarea name="newEventDescription" rows="8" cols="40"
-              placeholder="Describe your event" ng-model="newEvent.description"></textarea>
+              placeholder="Describe your event" ng-model="newEvent.description">
+            </textarea>
           </div>
           <button type="button" name="button"
-            ng-click="newEvent.creator = org; createEvent(newEvent);
-              inviteCollaborators(orgsArray)">Create!</button>
+            ng-click="newEvent.creator = org; makeAndSend(newEvent, orgsArray)">
+            Create!</button>
         </form>
       </div>
 

@@ -40,10 +40,4 @@ myApp.controller("RegisterController",
     });
   };
 
-  $scope.newGroup = {};
-  $scope.createGroup = UserService.createGroup;
-  $scope.groups = UserService.groups;
-  UserService.getGroups();
-  $scope.baseURL = $location.$$protocol + '://' + $location.$$host + ':' + $location.$$port;
-
 }]);

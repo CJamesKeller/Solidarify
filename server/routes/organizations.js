@@ -49,6 +49,22 @@ router.get("/", function(req, res) {
 });
 
 /**
+ * @returns {object} Contains all potential collaborator organization objects.
+ */
+router.get("/array", function(req, res) {
+  let orgID = req.body._id;
+  Organizations.findOne({ _id: orgID}, function(err, thisOrg) {
+    if ( err ) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+    else {
+      res.send(thisOrg);
+    }
+  });
+});
+
+/**
  * @returns {object} The saved organization.
  */
 router.post("/add", function(req, res) {

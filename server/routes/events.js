@@ -14,6 +14,7 @@ let EventSchema = mongoose.Schema({
   time    : Date,
   desc    : String,
   creator : String,
+  code    : String,
   orgs    : Array
 });
 let Events = mongoose.model("Events", EventSchema);
@@ -43,6 +44,7 @@ router.post("/add", function(req, res) {
   thisEvent.time    = req.body.time;
   thisEvent.desc    = req.body.desc;
   thisEvent.creator = req.body.creator;
+  thisEvent.code    = req.body.code;
   thisEvent.orgs    = [];
   thisEvent.save(function(err, savedEvent) {
     if ( err ) {
@@ -70,6 +72,37 @@ router.put("/edit/:id", function(req, res) {
       thisEvent.time    = req.body.time     || thisEvent.time;
       thisEvent.desc    = req.body.desc     || thisEvent.desc;
       thisEvent.creator = req.body.creator  || thisEvent.creator;
+      thisEvent.code    = req.body.code     || thisEvent.code;
+      thisEvent.orgs    = req.body.orgs     || thisEvent.orgs;
+      updatedEvent.save(function(err, updatedEvent) {
+        if ( err ) {
+          console.log(err);
+          res.sendStatus(500);
+        }
+        else {
+          res.send(updatedEvent);
+        }
+      });
+    }
+  });
+});
+
+/**
+ * @returns {object} The updated event.
+ */
+router.put("/collaborate/:code", function(req, res) {
+  let code = req.params.code,
+  Events.find({"code": code}, function(err, updatedEvent) {
+    if ( err ) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+    else {
+      thisEvent.name    = req.body.name     || thisEvent.name;
+      thisEvent.time    = req.body.time     || thisEvent.time;
+      thisEvent.desc    = req.body.desc     || thisEvent.desc;
+      thisEvent.creator = req.body.creator  || thisEvent.creator;
+      thisEvent.code    = req.body.code     || thisEvent.code;
       thisEvent.orgs    = req.body.orgs     || thisEvent.orgs;
       updatedEvent.save(function(err, updatedEvent) {
         if ( err ) {

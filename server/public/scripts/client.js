@@ -51,6 +51,15 @@ myApp.config(["$routeProvider", function($routeProvider ) {
         }]
       }
     })
+    .when('/collaborate/:code', {
+      templateUrl: '/views/templates/collaborate.html',
+      controller: 'CollaborateController',
+      resolve: {
+        getuser : ['UserService', function(UserService){
+          return UserService.getuser();
+        }]
+      }
+    })
     .otherwise({
       redirectTo: "index"
     });

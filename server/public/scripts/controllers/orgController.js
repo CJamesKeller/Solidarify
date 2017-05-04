@@ -1,6 +1,8 @@
 myApp.controller("OrgController",
-["$scope", "$http", "$location", "LoginService", "MailService", "InfoService",
-function($scope, $http, $location, LoginService, MailService, InfoService) {
+  ["$scope", "$http", "$location", "LoginService", "MailService", "InfoService",
+  "PermissionService",
+  function($scope, $http, $location, LoginService, MailService, InfoService,
+  PermissionService) {
 
   //INFO FUNCTIONALITY
 
@@ -26,7 +28,7 @@ function($scope, $http, $location, LoginService, MailService, InfoService) {
   $scope.deleteOrg = InfoService.deleteOrg;
     //EVENTS
   InfoService.getEvents();
-  $scope.newEvent = InfoService.newEvent;
+  $scope.createEvent = InfoService.createEvent;
   $scope.allEvents = InfoService.allEvents.eventArray;
   $scope.editEvent = InfoService.editEvent;
   $scope.deleteEvent = InfoService.deleteEvent;
@@ -50,80 +52,56 @@ function($scope, $http, $location, LoginService, MailService, InfoService) {
   };
   $scope.message = "";
 
-  $scope.login = function() {
-    if ( $scope.user.username === "" || $scope.user.password === "" ) {
-      $scope.message = "Enter your username and password!";
-    }
-    else {
-      $http.post("/", $scope.user).then(function(response) {
-        if ( response.data.username ) {
-          // location works with SPA (ng-route)
-          $location.path("/user"); //angular service managing redirects
-        }
-        else {
-          $scope.message = "Wrong!!";
-        }
-      });
-    }
+  //PERMISSION FUNCTIONALITY
+  $scope.newGroup = {};
+  $scope.makeAndSend = function(newEvent, collaborators) {
+    let newEventObject = InfoService.createEvent(newEvent);
+    let newEventID = newEventObject._id;
+    let eventCode = findCollaborators(collaborators);
+    InfoService.finishEvent(newEventID, eventCode);
   };
 
-  $scope.registerUser = function() {
-    if ( $scope.user.username === "" || $scope.user.password === "" ) {
-      $scope.message = "Choose a username and password!";
-    }
-    else {
-      $http.post("/register", $scope.user).then(function(response) {
-        $location.path("/home");
-      },
-      function(response) {
-        $scope.message = "Please try again.";
+  /**
+   * @param {array} orgsArray Contains all selected collaborator orgs ID's.
+   * @returns {array} Contains all selected collaborator organizations' info.
+   */
+  findCollaborators = function(orgsArray) {
+    let collaboratorArray = [],
+        numOrgs = 0,
+        thisEventCode;
+    numOrgs = orgsArray.length;
+    for (i = 0; i < numOrgs; i++) {
+      $http.get("/organizations/array", orgsArray[i]).then(function(response) {
+        collaboratorArray.push(response);
       });
     }
+    thisEventCode = sendConfirmation(collaboratorArray);
+    return thisEventCode;
   };
+
+  /**
+   * @param {array} collaborators Contains all selected collaborator org info.
+   * @returns {string} The event-specific invitation code.
+   */
+  sendConfirmation = function(collaborators) {
+    let newInviteObj  = PermissionService.createInvite(),
+        newInviteCode = newInviteObj.code,
+        numOrgs = collaborators.length
+        for (i = 0; i < numOrgs; i++) {
+          let email = collaborators[i].email,
+              mailObject = {
+            toEmail: email,
+            subject: "Confirm Collaboration",
+            message: "Please click the link to confirm collaboration: <a href='" +
+              $scope.baseURL + "/#/collaborate/" + newInviteCode + "'>Register</a>."
+          };
+          MailService.sendEmail(mailObject);
+        }
+        return newInviteCode;
+  };
+
+  $scope.groups = PermissionService.groups;
+  PermissionService.getGroups();
+  $scope.baseURL = $location.$$protocol + '://' + $location.$$host + ':' + $location.$$port;
+
 }]);
-
-// $scope.login = function() {
-//   if($scope.user.username === '' || $scope.user.password === '') {
-//     $scope.message = "Enter your username and password!";
-//   } else {
-//     console.log('sending to server...', $scope.user);
-//     $http.post('/', $scope.user).then(function(response) {
-//       if(response.data.username) {
-//         console.log('success: ', response.data);
-//
-//         if(UserService.code.tempCode != undefined) {
-//           // Do we have an activation code?
-//           $location.path('/activate/' + UserService.code.tempCode);
-//         } else {
-//           // location works with SPA (ng-route)
-//           $location.path('/user');
-//         }
-//       } else {
-//         console.log('failure: ', response);
-//         $scope.message = "Wrong!!";
-//       }
-//     });
-//   }
-// };
-//
-// $scope.registerUser = function() {
-//   if($scope.user.username === '' || $scope.user.password === '') {
-//     $scope.message = "Choose a username and password!";
-//   } else {
-//     console.log('sending to server...', $scope.user);
-//     $http.post('/register', $scope.user).then(function(response) {
-//       console.log('success');
-//       if(UserService.code.tempCode != undefined) {
-//         // Do we have an activation code?
-//         $location.path('/activate/' + UserService.code.tempCode);
-//       } else {
-//         // location works with SPA (ng-route)
-//         $location.path('/user');
-//       }
-//     },
-//     function(response) {
-//       console.log('error');
-//       $scope.message = "Please try again."
-//     });
-//   }
-// }

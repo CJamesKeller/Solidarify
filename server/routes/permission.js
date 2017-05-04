@@ -68,4 +68,23 @@ router.put('/join/:code', function(req, res) {
   });
 });
 
+/**
+ * @returns {object} The newly updated permission.
+ */
+router.put('/collaborate/:code', function(req, res) {
+  let code = req.params.code;
+  Permission.findOne({ 'code': code }, function(err, foundPermission) {
+      if ( err ) {
+        res.sendStatus(500);
+      }
+      foundPermission.users.push(req.user._id);
+      foundPermission.save(function(err, savedPermission) {
+        if ( err ) {
+          res.sendStatus(500);
+        }
+        res.send(savedPermission);
+      });
+  });
+});
+
 module.exports = router;

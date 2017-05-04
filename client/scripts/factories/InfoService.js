@@ -50,10 +50,11 @@ deleteOrg = function(orgID) {
 //EVENTS
 /**
 * @param {object} newEventObj An object containing the new event info.
+* @returns {object} The new event.
 */
-newEvent = function(newEventObj) {
+createEvent = function(newEventObj) {
   $http.post("/events", newEventObj).then(function(response) {
-      $location.path("/org"); //??? ??? ???
+      return response;
   });
 };
 
@@ -76,6 +77,18 @@ getEvents = function() {
 editEvent = function(eventID) { //THIS STILL NEEDS TO BE FIXED
   let id = eventID;
   $http.put("/events/" + id).then(function(response) {
+    $location.path("/admin"); //??? ??? ???
+  });
+};
+
+/**
+ * @param {string} eventID Used to find the event.
+ * @param {string} eventCode Used to update the event info.
+ */
+finishEvent = function(eventID, eventCode) { //THIS STILL NEEDS TO BE FIXED
+  let id = eventID,
+      code = eventCode;
+  $http.put("/events/finish" + id, {"code": code}).then(function(response) {
     $location.path("/admin"); //??? ??? ???
   });
 };
