@@ -10,21 +10,6 @@ myApp.controller("AdminController",
   $scope.deleteReq  = RequestService.deleteReq;
 
   //INFO FUNCTIONALITY
-
-  // thisEvent = {
-  //   name    : String,
-  //   time    : Date,
-  //   desc    : String,
-  //   creator : String,
-  //   orgs    : Array
-  // };
-  // thisOrg = {
-  //   name  :  String,
-  //   email :  String,
-  //   site  :  String,
-  //   desc  :  String
-  // };
-
     //ORGANIZATIONS
   InfoService.getOrgs();
   $scope.newOrg     = InfoService.newOrg;

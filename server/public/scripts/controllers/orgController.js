@@ -5,31 +5,16 @@ myApp.controller("OrgController",
   PermissionService) {
 
   //INFO FUNCTIONALITY
-
-  // thisEvent = {
-  //   name    : String,
-  //   time    : Date,
-  //   desc    : String,
-  //   creator : String,
-  //   orgs    : Array
-  // };
-  // thisOrg = {
-  //   name  :  String,
-  //   email :  String,
-  //   site  :  String,
-  //   desc  :  String
-  // };
-
     //ORGANIZATIONS
   InfoService.getOrgs();
   $scope.newOrg = InfoService.newOrg;
-  $scope.allOrgs = InfoService.allOrgs.orgArray;
+  $scope.allOrgs = InfoService.allOrgs;
   $scope.editOrg = InfoService.editOrg;
   $scope.deleteOrg = InfoService.deleteOrg;
     //EVENTS
   InfoService.getEvents();
   $scope.createEvent = InfoService.createEvent;
-  $scope.allEvents = InfoService.allEvents.eventArray;
+  $scope.allEvents = InfoService.allEvents;
   $scope.editEvent = InfoService.editEvent;
   $scope.deleteEvent = InfoService.deleteEvent;
 
@@ -55,10 +40,11 @@ myApp.controller("OrgController",
   //PERMISSION FUNCTIONALITY
   $scope.newGroup = {};
   $scope.makeAndSend = function(newEvent, collaborators) {
-    let newEventObject = InfoService.createEvent(newEvent);
-    let newEventID = newEventObject._id;
-    let eventCode = findCollaborators(collaborators);
-    InfoService.finishEvent(newEventID, eventCode);
+    InfoService.createEvent(newEvent).then(function(createdEvent) {
+      let eventCode = findCollaborators(collaborators);
+      let newEventID = createdEvent.data._id;
+      InfoService.finishEvent(newEventID, eventCode);
+    });
   };
 
   /**
@@ -69,11 +55,13 @@ myApp.controller("OrgController",
     let collaboratorArray = [],
         numOrgs = 0,
         thisEventCode;
-    numOrgs = orgsArray.length;
-    for (i = 0; i < numOrgs; i++) {
-      $http.get("/organizations/array", orgsArray[i]).then(function(response) {
-        collaboratorArray.push(response);
-      });
+    if ( orgsArray ) {
+      numOrgs = orgsArray.length;
+      for (i = 0; i < numOrgs; i++) {
+        $http.get("/organizations/array", orgsArray[i]).then(function(response) {
+          collaboratorArray.push(response);
+        });
+      }
     }
     thisEventCode = sendConfirmation(collaboratorArray);
     return thisEventCode;

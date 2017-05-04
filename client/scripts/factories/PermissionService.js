@@ -83,7 +83,6 @@ myApp.factory('PermissionService',
     getuser : getUser,
     logout : logout,
     createInvite : createInvite,
-    createEvent : createEvent,
     joinGroup : joinGroup,
     getGroups : getGroups
   };

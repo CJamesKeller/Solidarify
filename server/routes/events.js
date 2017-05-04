@@ -11,7 +11,7 @@ let express   = require("Express"),
 //EVENT SCHEMA
 let EventSchema = mongoose.Schema({
   name    : String,
-  time    : Date,
+  time    : String, //***Eventually change to Date
   desc    : String,
   creator : String,
   code    : String,
@@ -38,13 +38,13 @@ router.get("/", function(req, res) {
 /**
  * @returns {object} The saved event.
  */
-router.post("/add", function(req, res) {
+router.post("/", function(req, res) {
   let thisEvent = new Events();
   thisEvent.name    = req.body.name;
   thisEvent.time    = req.body.time;
   thisEvent.desc    = req.body.desc;
   thisEvent.creator = req.body.creator;
-  thisEvent.code    = req.body.code;
+  thisEvent.code    = req.body.code || "noCode";
   thisEvent.orgs    = [];
   thisEvent.save(function(err, savedEvent) {
     if ( err ) {
@@ -75,6 +75,36 @@ router.put("/edit/:id", function(req, res) {
       thisEvent.code    = req.body.code     || thisEvent.code;
       thisEvent.orgs    = req.body.orgs     || thisEvent.orgs;
       updatedEvent.save(function(err, updatedEvent) {
+        if ( err ) {
+          console.log(err);
+          res.sendStatus(500);
+        }
+        else {
+          res.send(updatedEvent);
+        }
+      });
+    }
+  });
+});
+
+/**
+ * @returns {object} The updated event.
+ */
+router.put("/finish/:id", function(req, res) {
+  let id = req.params.id;
+  Events.findById(req.params.id, function(err, thisEvent) {
+    if ( err ) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+    else {
+      thisEvent.name    = req.body.name     || thisEvent.name;
+      thisEvent.time    = req.body.time     || thisEvent.time;
+      thisEvent.desc    = req.body.desc     || thisEvent.desc;
+      thisEvent.creator = req.body.creator  || thisEvent.creator;
+      thisEvent.code    = req.body.code     || thisEvent.code;
+      thisEvent.orgs    = req.body.orgs     || thisEvent.orgs;
+      thisEvent.save(function(err, updatedEvent) {
         if ( err ) {
           console.log(err);
           res.sendStatus(500);

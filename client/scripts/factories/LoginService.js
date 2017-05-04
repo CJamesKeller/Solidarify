@@ -10,6 +10,7 @@ myApp.factory("LoginService", ["$http", "$location", function($http, $location) 
           if ( response.data.username ) {
               // user has a curret session on the server
               userObject.userName = response.data.username;
+              userObject.id = response.data._id;
           }
           else {
               // user has no session, bounce them back to the login page

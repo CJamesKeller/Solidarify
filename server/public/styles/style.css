@@ -17,6 +17,8 @@
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
   filter: blur(5px);
+
+  opacity: 0.5;
 }
 .content {
   position: relative;
@@ -43,17 +45,20 @@
   padding-bottom: 20px;
 }
 
-/*ORG-REQUESTS FORMATTING*/
-.thisRequest{
+/*REPEATS FORMATTING*/
+.thisRequest, .thisEvent, .editOrgWrap, .newEventCreator{
   background: rgba(128, 128, 128, 0.4);
   padding: 10px;
 }
-.reqWrap{
+.reqWrap, .eventWrap, .extraLayer{
   padding: 10px;
 }
 .blackText{
   padding-right: 10px;
   font-weight: bold;
+}
+.borderThis{
+  border: 2px solid black;
 }
 
 /*FUNCTIONAL*/

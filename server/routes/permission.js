@@ -58,7 +58,6 @@ router.put('/join/:code', function(req, res) {
       if ( err ) {
         res.sendStatus(500);
       }
-      foundPermission.users.push(req.user._id);
       foundPermission.save(function(err, savedPermission) {
         if ( err ) {
           res.sendStatus(500);

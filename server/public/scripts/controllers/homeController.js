@@ -26,7 +26,7 @@ myApp.controller("HomeController",
           $location.path("/admin");
         }
         else if ( response.data.username ) {
-          $location.path("/home");
+          $location.path("/org");
         }
         else {
           $scope.message = "Wrong!!";

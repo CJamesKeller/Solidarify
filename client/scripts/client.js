@@ -10,21 +10,25 @@ myApp.config(["$routeProvider", function($routeProvider ) {
       templateUrl: "/views/templates/home.html",
       controller: "HomeController",
     })
-    .when("/register", {
-      templateUrl: "/views/templates/register.html",
-      controller: "RegisterController",
-      resolve: {
-        permit : function(PermissionService) {
-          return PermissionService.canRegister;
-        }
-      }
-    })
     .when("/admin", {
       templateUrl: "/views/templates/admin.html",
       controller: "AdminController",
       resolve: {
         isAdmin : function(LoginService) {
           return LoginService.isAdmin();
+        }
+      }
+    })
+    .when("/activate/:code", {
+      templateUrl: '/views/templates/activate.html',
+      controller: 'ActivateController',
+    })
+    .when("/register", {
+      templateUrl: "/views/templates/register.html",
+      controller: "RegisterController",
+      resolve: {
+        permit : function(PermissionService) {
+          return PermissionService.canRegister;
         }
       }
     })
@@ -37,16 +41,7 @@ myApp.config(["$routeProvider", function($routeProvider ) {
         }
       }
     })
-    // .when("/search", {
-    //   templateUrl: "/views/templates/search.html",
-    //   controller: "SearchController"
-    // })
-    // Accept a route with an activation code as a parameter
-    .when('/activate/', {
-      templateUrl: '/views/templates/activate.html',
-      controller: 'ActivateController',
-    })
-    .when('/collaborate/', {
+    .when('/collaborate/:code', {
       templateUrl: '/views/templates/collaborate.html',
       controller: 'CollaborateController',
       resolve: {
@@ -55,6 +50,10 @@ myApp.config(["$routeProvider", function($routeProvider ) {
         }]
       }
     })
+    // .when("/search", {
+    //   templateUrl: "/views/templates/search.html",
+    //   controller: "SearchController"
+    // })
     .otherwise({
       redirectTo: "index"
     });

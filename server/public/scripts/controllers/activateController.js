@@ -2,6 +2,7 @@ myApp.controller('ActivateController',
   ['$scope', '$http', '$location', '$routeParams', 'PermissionService',
   function($scope, $http, $location, $routeParams, PermissionService) {
 
+  console.log("In ActivateController");
   $scope.logout     = PermissionService.logout;
   $scope.code       = angular.copy(PermissionService.code);
   $scope.joinGroup  = PermissionService.joinGroup;

@@ -1,13 +1,13 @@
-<div class="content row container">
-  <div class="wrapper">
-    <h1>MANAGEMENT PORTAL</h1>
-    <span class="col-xs-10"><h1 id="welcome" class="lead">Welcome, {{userObject.userName}}!</h1></span>
-    <span class="col-xs-2"><button class="btn btn-default" ng-click="logout()">Log Out</button></span>
+<div class="content container">
+  <h1>MANAGEMENT PORTAL</h1>
+  <span class="col-xs-10"><h1 id="welcome" class="lead">Welcome, {{userObject.userName}}!</h1></span>
+  <span class="col-xs-2"><button class="btn btn-default" ng-click="logout()">Log Out</button></span>
 
-    <div class="row">
-      <!-- EDIT ORG INFO -->
-      <!-- ***NOT YET WORKING*** -->
-      <div class="col-xs-4">
+  <div class="row">
+    <!-- EDIT ORG INFO -->
+    <!-- ***NOT YET WORKING*** -->
+    <div class="col-xs-12 col-md-4 editOrgInfo">
+      <div class="editOrgWrap borderThis">
         <h2>Edit your info:</h2>
         <form class="orgInfo" action="index.html" method="post">
           <div>
@@ -32,11 +32,13 @@
           <button type="button" name="button" ng-click="editOrg(org)">Save</button>
         </form>
       </div>
+    </div>
 
-      <!-- CREATE NEW EVENT -->
-      <div class="col-xs-4">
+    <!-- CREATE NEW EVENT -->
+    <div class="col-xs-12 col-md-4 createNewEvent">
+      <div class="newEventCreator borderThis">
         <h2>Create a new event!</h2>
-        <form class="newEvent" action="index.html" method="post">
+        <form class="someNewEvent" action="index.html" method="post">
           <div>
             <span class="blackText">Name:</span>
             <input type="text" name="newEventName" value=""
@@ -54,47 +56,46 @@
               type="button" name="button">EXPAND</button>
               <div class="wrapOrgs" ng-show="showOrgs">
                 <div class="allOrgs">
-                  <div class="thisOrg" ng-repeat="org in orgArray">
-                    <button ng-click="orgsArray.push(org._id)"
-                      type="button" name="button">{{org.name}}</button>
+                  <div class="thisOrg" ng-repeat="someOrg in allOrgs">
+                    <button ng-click="orgsArray.push(someOrg._id)"
+                      type="button" name="button">{{someOrg.name}}</button>
                   </div>
                 </div>
+                <button ng-click="showOrgs = false"
+                  type="button" name="button">COLLAPSE</button>
               </div>
-            <button ng-click="showOrgs = false"
-              type="button" name="button">COLLAPSE</button>
           </div>
           <div>
             <span class="blackText">Description:</span>
             <textarea name="newEventDescription" rows="8" cols="40"
-              placeholder="Describe your event" ng-model="newEvent.description">
+              placeholder="Describe your event" ng-model="newEvent.desc">
             </textarea>
           </div>
           <button type="button" name="button"
-            ng-click="newEvent.creator = org; makeAndSend(newEvent, orgsArray)">
+            ng-click="newEvent.creator = userObject.id; makeAndSend(newEvent, orgsArray)">
             Create!</button>
         </form>
       </div>
+    </div>
 
-      <!-- DISPLAY ALL ORG EVENTS -->
-      <div class="col-xs-4">
-        <div class="imageAdder">
-        </div>
-        <div class="myEvents">
-          <div class="thisEvent" ng-repeat="event in allEvents">
-            <div class="container">
-              <span class="blackText">Name:</span><p>{{event.name}}</p>
-              <span class="blackText">Time:</span><p>{{event.time}}</p>
-              <span class="blackText">Collaborators:</span><p>{{event.orgs}}</p>
-              <span class="blackText">Description:</span><p>{{event.description}}</p>
-              <!-- ***EDIT HERE NOT YET WORKING*** -->
-              <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>
-              <button type="button" name="button" ng-click="deleteEvent(event._id)">DELETE</button>
-            </div>
+    <!-- DISPLAY ALL ORG EVENTS -->
+    <div class="col-xs-12 col-md-4 myEvents borderThis">
+      <div class="extraLayer">
+        <h2>Your Events:</h2>
+        <div class="eventWrap" ng-repeat="event in allEvents.eventArray">
+          <div class="thisEvent borderThis">
+            <span class="blackText">Name:</span><p>{{event.name}}</p>
+            <span class="blackText">Time:</span><p>{{event.time}}</p>
+            <span class="blackText">Collaborators:</span><p>{{event.orgs}}</p>
+            <span class="blackText">Description:</span><p>{{event.description}}</p>
+            <!-- ***EDIT HERE NOT YET WORKING*** -->
+            <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>
+            <button type="button" name="button" ng-click="deleteEvent(event._id)">DELETE</button>
           </div>
         </div>
       </div>
-
     </div>
 
   </div>
+
 </div>

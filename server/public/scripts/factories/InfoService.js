@@ -3,7 +3,7 @@
 * @author Christopher Keller
 */
 
-myApp.factory("InfoService", ["$http", function($http) {
+myApp.factory("InfoService", ["$http", "$location", function($http, $location) {
 
 //ORGANIZATIONS
 /**
@@ -53,7 +53,7 @@ deleteOrg = function(orgID) {
 * @returns {object} The new event.
 */
 createEvent = function(newEventObj) {
-  $http.post("/events", newEventObj).then(function(response) {
+  return $http.post("/events", newEventObj).then(function(response) {
       return response;
   });
 };
@@ -88,8 +88,8 @@ editEvent = function(eventID) { //THIS STILL NEEDS TO BE FIXED
 finishEvent = function(eventID, eventCode) { //THIS STILL NEEDS TO BE FIXED
   let id = eventID,
       code = eventCode;
-  $http.put("/events/finish" + id, {"code": code}).then(function(response) {
-    $location.path("/admin"); //??? ??? ???
+  $http.put("/events/finish/" + id, {"code": code}).then(function(response) {
+    $location.path("/org");
   });
 };
 
@@ -113,6 +113,7 @@ deleteEvent = function(eventID) {
     editOrg : editOrg,
     editEvent : editEvent,
     deleteOrg : deleteOrg,
+    finishEvent : finishEvent,
     deleteEvent : deleteEvent
   };
 
