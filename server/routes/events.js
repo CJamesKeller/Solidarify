@@ -91,7 +91,7 @@ router.put("/edit/:id", function(req, res) {
  * @returns {object} The updated event.
  */
 router.put("/collaborate/:code", function(req, res) {
-  let code = req.params.code,
+  let code = req.params.code;
   Events.find({"code": code}, function(err, updatedEvent) {
     if ( err ) {
       console.log(err);

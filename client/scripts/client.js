@@ -13,11 +13,11 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     .when("/register", {
       templateUrl: "/views/templates/register.html",
       controller: "RegisterController",
-      // resolve: {
-      //   getuser : function(LoginService) {    //ONLY IF TOKEN MATCHES
-      //     return LoginService.getuser();
-      //   }
-      // }
+      resolve: {
+        permit : function(PermissionService) {
+          return PermissionService.canRegister;
+        }
+      }
     })
     .when("/admin", {
       templateUrl: "/views/templates/admin.html",
@@ -31,27 +31,22 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     .when("/org", {
       templateUrl: "/views/templates/organization.html",
       controller: "OrgController",
-      // resolve: {
-      //   getuser : function(LoginService) {    //SEND TO THEIR OWN PAGE
-      //     return LoginService.getuser();
-      //   }
-      // }
+      resolve: {
+        getuser : function(LoginService) {
+          return LoginService.getuser();
+        }
+      }
     })
     // .when("/search", {
     //   templateUrl: "/views/templates/search.html",
     //   controller: "SearchController"
     // })
     // Accept a route with an activation code as a parameter
-    .when('/activate/:code', {
+    .when('/activate/', {
       templateUrl: '/views/templates/activate.html',
       controller: 'ActivateController',
-      resolve: {
-        getuser : ['UserService', function(UserService){
-          return UserService.getuser();
-        }]
-      }
     })
-    .when('/collaborate/:code', {
+    .when('/collaborate/', {
       templateUrl: '/views/templates/collaborate.html',
       controller: 'CollaborateController',
       resolve: {

@@ -1,9 +1,10 @@
-myApp.factory('UserService',
+myApp.factory('PermissionService',
   ['$http', '$location', '$route', function($http, $location, $route) {
 
   let code        = {},
       userObject  = {},
-      groups      = {};
+      groups      = {},
+      canRegister = false;
 
   getGroups = function(){
     $http.get('/permission/').then(function(response) {
@@ -17,7 +18,8 @@ myApp.factory('UserService',
   joinGroup = function(permissionCode) {
     $http.put('/permission/join/' + permissionCode ).then(function(response) {
       code.tempCode = undefined;
-      $location.path("/org");
+      canRegister = true;
+      $location.path("/register");
     });
   };
 
@@ -37,7 +39,7 @@ myApp.factory('UserService',
    * @returns {object} The new invitation.
    */
   createInvite = function() {
-    $http.post('/permission/create').then(function(response) {
+    return $http.post('/permission/create').then(function(response) {
       getGroups();
       return response;
     });
@@ -76,6 +78,7 @@ myApp.factory('UserService',
     userObject : userObject,
     code: code,
     groups: groups,
+    canRegister: canRegister,
     // Functions
     getuser : getUser,
     logout : logout,

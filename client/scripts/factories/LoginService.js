@@ -21,9 +21,8 @@ myApp.factory("LoginService", ["$http", "$location", function($http, $location) 
     isAdmin : function() {
       $http.get("/user").then(function(response) {
           if ( response.data.username === "chrisMaster") {
-              // user has a curret session on the server
               userObject.userName = response.data.username;
-              $location.path("/admin"); //***THIS DOES NOT WORK YET***
+              $location.path("/admin");
           }
           else {
               // user has no session, bounce them back to the login page

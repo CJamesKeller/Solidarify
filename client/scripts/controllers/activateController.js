@@ -9,5 +9,4 @@ myApp.controller('ActivateController',
   if ( $routeParams.code !== undefined ) {
     $scope.code.tempCode = $routeParams.code;
   }
-  // Else bounce user to log in screen
 }]);

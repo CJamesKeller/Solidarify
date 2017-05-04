@@ -105,7 +105,7 @@ deleteEvent = function(eventID) {
 
   return {
     newOrg : newOrg,
-    newEvent : newEvent,
+    createEvent : createEvent,
     getOrgs : getOrgs,
     allOrgs : allOrgs,
     allEvents : allEvents,

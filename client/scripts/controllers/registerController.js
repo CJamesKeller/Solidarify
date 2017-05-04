@@ -1,6 +1,6 @@
 myApp.controller("RegisterController",
-  ["$scope", "$http", "$location", "LoginService", "UserService",
-  function($scope, $http, $location, LoginService, UserService) {
+  ["$scope", "$http", "$location", "LoginService", "PermissionService",
+  function($scope, $http, $location, LoginService, PermissionService) {
 
   $scope.userObject = LoginService.userObject;
   $scope.logout = LoginService.logout;
@@ -17,8 +17,8 @@ myApp.controller("RegisterController",
     }
     else {
       $http.post("/register", $scope.user).then(function(response) {
-        if ( UserService.code.tempCode !== undefined ) {
-          $location.path('/activate/' + UserService.code.tempCode);
+        if ( PermissionService.code.tempCode !== undefined ) {
+          $location.path('/activate/' + PermissionService.code.tempCode);
         }
         else {
           $location.path('/user');

@@ -63,15 +63,19 @@ myApp.controller("AdminController",
    * @param {string} email Contains the email address for the code recipient.
    */
   $scope.createInvite = function(email) {
-    let newInviteObj  = PermissionService.createInvite(),
-        newInviteCode = newInviteObj.code,
-        mailObject    = {
-          toEmail: email,
-          subject: "Welcome to Solidarify!",
-          message: "Please click the link to register your account: <a href='" +
-            $scope.baseURL + "/#/activate/" + newInviteCode + "'>Register</a>."
-        };
-    MailService.sendEmail(mailObject);
+    let newInviteObj,
+        newInviteCode,
+        mailObject;
+    PermissionService.createInvite().then(function(createdInvite) {
+      newInviteCode = createdInvite.data.code;
+      mailObject    = {
+            toEmail: email,
+            subject: "Welcome to Solidarify!",
+            message: "Please click the link to register your account: <a href='" +
+              $scope.baseURL + "/#!/activate/" + newInviteCode + "'>Register</a>."
+          };
+      MailService.sendEmail(mailObject);
+    });
   };
 
 }]);
