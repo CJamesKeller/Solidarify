@@ -53,7 +53,7 @@ deleteOrg = function(orgID) {
 */
 newEvent = function(newEventObj) {
   $http.post("/events", newEventObj).then(function(response) {
-      $location.path("/home"); //??? ??? ???
+      $location.path("/org"); //??? ??? ???
   });
 };
 

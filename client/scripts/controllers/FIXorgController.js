@@ -1,8 +1,8 @@
 myApp.controller("OrgController",
   ["$scope", "$http", "$location", "LoginService", "MailService", "InfoService",
-  "UserService",
+  "PermissionService",
   function($scope, $http, $location, LoginService, MailService, InfoService,
-  UserService) {
+  PermissionService) {
 
   //INFO FUNCTIONALITY
 
@@ -52,10 +52,33 @@ myApp.controller("OrgController",
   };
   $scope.message = "";
 
+  //PERMISSION FUNCTIONALITY
   $scope.newGroup = {};
-  $scope.createGroup = UserService.createGroup;
-  $scope.groups = UserService.groups;
-  UserService.getGroups();
+  $scope.inviteCollaborators = function(collaborators) {
+    findCollaborators(collaborators);
+    sendConfirmation();
+  };
+
+  findCollaborators = function(orgsArray) {
+    $http.get("/organizations/array", orgsArray).then(function(response) {
+      
+    });
+  };
+
+  sendConfirmation = function() {
+    let newInviteObj  = PermissionService.createInvite(),
+        newInviteCode = newInviteObj.code,
+        mailObject    = {
+          toEmail: email,
+          subject: "Confirm Collaboration",
+          message: "Please click the link to confirm collaboration: <a href='" +
+            $scope.baseURL + "/#/activate/" + newInviteCode + "'>Register</a>."
+        };
+    MailService.sendEmail(mailObject);
+  };
+
+  $scope.groups = PermissionService.groups;
+  PermissionService.getGroups();
   $scope.baseURL = $location.$$protocol + '://' + $location.$$host + ':' + $location.$$port;
 
 }]);

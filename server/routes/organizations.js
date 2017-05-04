@@ -34,6 +34,21 @@ router.get("/", function(req, res) {
 });
 
 /**
+ * @returns {object} Contains all organization objects.
+ */
+router.get("/", function(req, res) {
+  Organizations.find({}, function(err, allOrganizations) { //{key: value}
+    if ( err ) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+    else {
+      res.send(allOrganizations);
+    }
+  });
+});
+
+/**
  * @returns {object} The saved organization.
  */
 router.post("/add", function(req, res) {

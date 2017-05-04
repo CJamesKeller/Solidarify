@@ -49,16 +49,28 @@
               placeholder="Event time" ng-model="newEvent.time">
           </div>
           <div>
-            <span class="blackText">Sponsors:</span>
-            <input type="text" name="newEventSponsors" value=""
-              placeholder="Add Sponsors" ng-model="newEvent.orgs">
+            <span class="blackText">Collaborators:</span>
+            <button ng-click="showOrgs = true" class="btn btn-default"
+              type="button" name="button">EXPAND</button>
+              <div class="wrapOrgs" ng-show="showOrgs">
+                <div class="allOrgs">
+                  <div class="thisOrg" ng-repeat="org in orgArray">
+                    <button ng-click="orgsArray.push(org._id)"
+                      type="button" name="button">{{org.name}}</button>
+                  </div>
+                </div>
+              </div>
+            <button ng-click="showOrgs = false"
+              type="button" name="button">COLLAPSE</button>
           </div>
           <div>
             <span class="blackText">Description:</span>
             <textarea name="newEventDescription" rows="8" cols="40"
               placeholder="Describe your event" ng-model="newEvent.description"></textarea>
           </div>
-          <button type="button" name="button" ng-click="addNewEvent(org)">Create!</button>
+          <button type="button" name="button"
+            ng-click="newEvent.creator = org; createEvent(newEvent);
+              inviteCollaborators(orgsArray)">Create!</button>
         </form>
       </div>
 
@@ -71,7 +83,7 @@
             <div class="container">
               <span class="blackText">Name:</span><p>{{event.name}}</p>
               <span class="blackText">Time:</span><p>{{event.time}}</p>
-              <span class="blackText">Sponsors:</span><p>{{event.orgs}}</p>
+              <span class="blackText">Collaborators:</span><p>{{event.orgs}}</p>
               <span class="blackText">Description:</span><p>{{event.description}}</p>
               <!-- ***EDIT HERE NOT YET WORKING*** -->
               <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>

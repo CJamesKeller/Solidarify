@@ -39,12 +39,11 @@ router.get("/", function(req, res) {
  */
 router.post("/add", function(req, res) {
   let thisEvent = new Events();
-  thisEvent.id      = req.body.id;
   thisEvent.name    = req.body.name;
   thisEvent.time    = req.body.time;
   thisEvent.desc    = req.body.desc;
   thisEvent.creator = req.body.creator;
-  thisEvent.orgs    = req.body.orgs;
+  thisEvent.orgs    = [];
   thisEvent.save(function(err, savedEvent) {
     if ( err ) {
       console.log(err);
