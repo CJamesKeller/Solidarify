@@ -12,11 +12,31 @@ myApp.controller("OrgController",
   $scope.editOrg = InfoService.editOrg;
   $scope.deleteOrg = InfoService.deleteOrg;
     //EVENTS
-  InfoService.getEvents();
-  $scope.createEvent = InfoService.createEvent;
   $scope.allEvents = InfoService.allEvents;
   $scope.editEvent = InfoService.editEvent;
-  $scope.deleteEvent = InfoService.deleteEvent;
+  $scope.deleteEvent = function(id) {
+    InfoService.deleteEvent(id)
+    .then(function(response) {
+      getMyEvents();
+    });
+  };
+  $scope.myEvents = {
+    eventsArray: []
+  };
+
+  getMyEvents = function() {
+    LoginService.getuser()
+    .then(function(response) {
+      thisUser = LoginService.userObject;
+      if ( thisUser.id ) {
+        let orgID = thisUser.id;
+        $http.get("/events/my-events/" + orgID).then(function(response) {
+          $scope.myEvents.eventsArray = response.data;
+        });
+      }
+    });
+  };
+  getMyEvents();
 
   //MAILER FUNCTIONALITY
   let mailer = this;
@@ -40,11 +60,18 @@ myApp.controller("OrgController",
   //PERMISSION FUNCTIONALITY
   $scope.newGroup = {};
   $scope.makeAndSend = function(newEvent, collaborators) {
-    InfoService.createEvent(newEvent).then(function(createdEvent) {
-      let eventCode = findCollaborators(collaborators);
+    newEvent.orgs = collaborators;
+    InfoService.createEvent(newEvent)
+    .then(function(createdEvent) {
       let newEventID = createdEvent.data._id;
-      InfoService.finishEvent(newEventID, eventCode);
+      if ( collaborators ) {
+        findCollaborators(collaborators)
+        .then(function(eventCode){
+          InfoService.finishEvent(newEventID, eventCode);
+        });
+      }
     });
+    getMyEvents();
   };
 
   /**
@@ -52,19 +79,20 @@ myApp.controller("OrgController",
    * @returns {array} Contains all selected collaborator organizations' info.
    */
   findCollaborators = function(orgsArray) {
-    let collaboratorArray = [],
-        numOrgs = 0,
+    let numOrgs = 0,
+        collabPromiseArray,
         thisEventCode;
-    if ( orgsArray ) {
-      numOrgs = orgsArray.length;
-      for (i = 0; i < numOrgs; i++) {
-        $http.get("/organizations/array", orgsArray[i]).then(function(response) {
-          collaboratorArray.push(response);
-        });
-      }
+    numOrgs = orgsArray.length;
+    for (i = 0; i < numOrgs; i++) {
+      $http.get("/organizations/array", orgsArray[i])
+      .then(function(response) {
+        collabPromiseArray.push(sendConfirmation(response));
+      });
     }
-    thisEventCode = sendConfirmation(collaboratorArray);
-    return thisEventCode;
+    return Promise.all(collabPromiseArray)
+    .then(function(thisEventCode){
+      return thisEventCode;
+    });
   };
 
   /**
@@ -72,20 +100,24 @@ myApp.controller("OrgController",
    * @returns {string} The event-specific invitation code.
    */
   sendConfirmation = function(collaborators) {
-    let newInviteObj  = PermissionService.createInvite(),
+    let mailPromiseArray,
+        newInviteObj  = PermissionService.createInvite(),
         newInviteCode = newInviteObj.code,
-        numOrgs = collaborators.length
-        for (i = 0; i < numOrgs; i++) {
-          let email = collaborators[i].email,
-              mailObject = {
-            toEmail: email,
-            subject: "Confirm Collaboration",
-            message: "Please click the link to confirm collaboration: <a href='" +
-              $scope.baseURL + "/#/collaborate/" + newInviteCode + "'>Register</a>."
-          };
-          MailService.sendEmail(mailObject);
-        }
-        return newInviteCode;
+        numOrgs = collaborators.length;
+    for (i = 0; i < numOrgs; i++) {
+      let email = collaborators[i].email,
+          mailObject = {
+        toEmail: email,
+        subject: "Confirm Collaboration",
+        message: "Please click the link to confirm collaboration: <a href='" +
+          $scope.baseURL + "/#/collaborate/" + newInviteCode + "'>Register</a>."
+      };
+      mailPromiseArray.push(MailService.sendEmail(mailObject));
+    }
+    return Promise.all(mailPromiseArray)
+    .then(function(){
+      return newInviteCode;
+    });
   };
 
   $scope.groups = PermissionService.groups;

@@ -21,15 +21,21 @@
           <div>
             <span class="blackText">Email:</span>
             <input ng-model="org.email" type="text" name="orgEmail" value="">
-            <input type="checkbox" ng-click="showInfo = false"> hidden
+            <br>
+            <div class="floatThis">
+              <input type="checkbox" ng-click="showInfo = false" id="hideThis">
+              <label for="hideThis">Email hidden</label>
+            </div>
           </div>
+          <br>
           <div>
             <span class="blackText">Description:</span>
           </div>
           <div>
-            <textarea name="name" rows="8" cols="40" ng-model="org.description"></textarea>
+            <textarea name="name" rows="8" cols="25" ng-model="org.desc"></textarea>
           </div>
-          <button type="button" name="button" ng-click="editOrg(org)">Save</button>
+          <button type="button" name="button"
+            ng-click="org.id = userObject._id; editOrg(org)">Save</button>
         </form>
       </div>
     </div>
@@ -46,14 +52,15 @@
         <!-- ***THE ABOVE ISN'T WORKING RIGHT*** -->
           </div>
           <div>
-            <span class="blackText">Time:</span>
-            <input type="text" name="newEventTime" value=""
+            <span class="blackText">Date:</span>
+            <input type="date" name="newEventTime" value=""
               placeholder="Event time" ng-model="newEvent.time">
           </div>
+          <br>
           <div>
             <span class="blackText">Collaborators:</span>
-            <button ng-click="showOrgs = true" class="btn btn-default"
-              type="button" name="button">EXPAND</button>
+            <button ng-click="showOrgs = true" class="btn btn-sm btn-default"
+              type="button" name="button">Expand</button>
               <div class="wrapOrgs" ng-show="showOrgs">
                 <div class="allOrgs">
                   <div class="thisOrg" ng-repeat="someOrg in allOrgs">
@@ -65,9 +72,11 @@
                   type="button" name="button">COLLAPSE</button>
               </div>
           </div>
+          <br>
           <div>
             <span class="blackText">Description:</span>
-            <textarea name="newEventDescription" rows="8" cols="40"
+            <br>
+            <textarea name="newEventDescription" rows="8" cols="25"
               placeholder="Describe your event" ng-model="newEvent.desc">
             </textarea>
           </div>
@@ -82,12 +91,12 @@
     <div class="col-xs-12 col-md-4 myEvents borderThis">
       <div class="extraLayer">
         <h2>Your Events:</h2>
-        <div class="eventWrap" ng-repeat="event in allEvents.eventArray">
+        <div class="eventWrap" ng-repeat="event in myEvents.eventsArray">
           <div class="thisEvent borderThis">
             <span class="blackText">Name:</span><p>{{event.name}}</p>
-            <span class="blackText">Time:</span><p>{{event.time}}</p>
+            <span class="blackText">Date:</span><p>{{event.time}}</p>
             <span class="blackText">Collaborators:</span><p>{{event.orgs}}</p>
-            <span class="blackText">Description:</span><p>{{event.description}}</p>
+            <span class="blackText">Description:</span><p>{{event.desc}}</p>
             <!-- ***EDIT HERE NOT YET WORKING*** -->
             <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>
             <button type="button" name="button" ng-click="deleteEvent(event._id)">DELETE</button>

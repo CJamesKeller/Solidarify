@@ -10,10 +10,11 @@ let express   = require("Express"),
 
 //ORGANIZATION SCHEMA
 let OrgSchema = mongoose.Schema({
-  name  : String,
-  email : String,
-  site  : String,
-  desc  : String
+  userID : String,
+  name   : String,
+  email  : String,
+  site   : String,
+  desc   : String
 });
 let Organizations = mongoose.model("Organizations", OrgSchema);
 
@@ -53,7 +54,7 @@ router.get("/", function(req, res) {
  */
 router.get("/array", function(req, res) {
   let orgID = req.body._id;
-  Organizations.findOne({ _id: orgID}, function(err, thisOrg) {
+  Organizations.findOne({ "_id": orgID}, function(err, thisOrg) {
     if ( err ) {
       console.log(err);
       res.sendStatus(500);
@@ -67,19 +68,20 @@ router.get("/array", function(req, res) {
 /**
  * @returns {object} The saved organization.
  */
-router.post("/add", function(req, res) {
+router.post("/", function(req, res) {
   let thisOrg = new Organizations();
-  thisOrg.id    = req.body.id;
-  thisOrg.name  = req.body.name;
-  thisOrg.email = req.body.email;
-  thisOrg.site  = req.body.site;
-  thisOrg.desc  = req.body.desc;
+  thisOrg.userID = req.body.id || "failed to get id";
+  thisOrg.name   = req.body.username || "failed to get username";
+  thisOrg.email  = req.body.email || "none";
+  thisOrg.site   = req.body.site || "none";
+  thisOrg.desc   = req.body.desc || "none";
   thisOrg.save(function(err, savedOrg) {
     if ( err ) {
       console.log(err);
       res.sendStatus(500);
     }
     else {
+      console.log(savedOrg);
       res.send(savedOrg);
     }
   });
@@ -90,7 +92,9 @@ router.post("/add", function(req, res) {
  */
 router.put("/edit/:id", function(req, res) {
   let id = req.params.id;
+  console.log(id);
   Organizations.findById(req.params.id, function(err, updatedOrg) {
+    console.log(updatedOrg);
     if ( err ) {
       console.log(err);
       res.sendStatus(500);
@@ -100,13 +104,13 @@ router.put("/edit/:id", function(req, res) {
       updatedOrg.email  = req.body.email  || updatedOrg.email;
       updatedOrg.site   = req.body.site   || updatedOrg.site;
       updatedOrg.desc   = req.body.desc   || updatedOrg.desc;
-      updatedOrg.save(function(err, updatedOrg) {
+      updatedOrg.save(function(err, savedOrg) {
         if ( err ) {
           console.log(err);
           res.sendStatus(500);
         }
         else {
-          res.send(updatedOrg);
+          res.send(savedOrg);
         }
       });
     }

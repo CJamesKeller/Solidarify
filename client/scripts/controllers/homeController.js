@@ -22,7 +22,7 @@ myApp.controller("HomeController",
     }
     else {
       $http.post("/", $scope.user).then(function(response) {
-        if ( response.data.username === "chrisMaster" ) {
+        if ( response.data.username === "SiteAdmin" ) {
           $location.path("/admin");
         }
         else if ( response.data.username ) {

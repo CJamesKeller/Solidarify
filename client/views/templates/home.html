@@ -3,12 +3,14 @@
 
     <!-- LOGIN BUTTON -->
     <div class="login col-xs-12">
-      <button class="btn btn-lg btn-default" ng-click="loginVar = true" type="button" name="login">Log In</button>
+      <button class="btn btn-lg btn-default btn-outline" ng-click="loginVar = true" type="button" name="login">Log In</button>
     </div>
     <!-- LOGIN FORM -->
     <div class="container" ng-show="loginVar">
       <h1 class="lead">Login</h1>
-        <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
+      <div class="boxThisOpp">
+        <button class="btn btn-sm btn-default floatThis" ng-click="loginVar = false"
+          type="button" name="button">X</button>
         <form>
           <div>
               <label for="username">Username:</label>
@@ -20,19 +22,21 @@
           </div>
           <button ng-click="login(); loginVar = false" type="button" name="loginButton" class="btn btn-lg btn-default">Submit</button>
         </form>
+      </div>
     </div>
 
     <div class="buffer col-xs-12">
     </div>
 
     <!-- SEARCH BUTTON -->
-    <div class="search col-xs-12">
-      <div class="empty col-xs-5">
+    <div class="col-xs-12">
+      <div class="col-xs-4">
       </div>
-      <div class="col-xs-2">
-        <button class="btn btn-lg btn-default" type="button" name="search">Search</button>
-      </div>
-      <div class="empty col-xs-5">
+      <div class="col-xs-4 boxThis">
+        <h1>SOLIDARINET</h1>
+        <div class="col-xs-12 centerThis">
+          <button class="btn btn-lg btn-default btn-outline-white" type="button" name="search">Search</button>
+        </div>
       </div>
     </div>
 
@@ -41,10 +45,12 @@
 
     <!-- REGISTER BUTTON -->
       <div class="register col-xs-12">
-        <button id="registerBtn" ng-click="registerVar = true" class="btn btn-lg btn-default" type="button" name="register">Register</button>
+        <button id="registerBtn" ng-click="registerVar = true" class="btn btn-lg btn-default btn-outline" type="button" name="register">Register</button>
       </div>
       <!-- REGISTER FORM -->
-      <div ng-show="registerVar" class="ng-cloak registrationForm col-xs-12">
+      <div ng-show="registerVar" class="ng-cloak registrationForm col-xs-12 boxThisOpp">
+        <button class="btn btn-sm btn-default" ng-click="registerVar = false"
+          type="button" name="button">X</button>
         <form class="registration" action="index.html" method="post">
           <h3>Request To Join Solidarify</h3>
           <input type="text" name="orgName" required="required"

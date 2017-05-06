@@ -6,7 +6,7 @@ myApp.factory("LoginService", ["$http", "$location", function($http, $location) 
     userObject : userObject,
 
     getuser : function() {
-      $http.get("/user").then(function(response) {
+      return $http.get("/user").then(function(response) {
           if ( response.data.username ) {
               // user has a curret session on the server
               userObject.userName = response.data.username;
@@ -21,7 +21,7 @@ myApp.factory("LoginService", ["$http", "$location", function($http, $location) 
 
     isAdmin : function() {
       $http.get("/user").then(function(response) {
-          if ( response.data.username === "chrisMaster") {
+          if ( response.data.username === "SiteAdmin") {
               userObject.userName = response.data.username;
               $location.path("/admin");
           }

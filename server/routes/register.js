@@ -18,7 +18,8 @@ router.post("/", function(req, res, next) {
          }
          else {
           // route a new GET "/" request
-          res.redirect("/");
+          console.log(post);
+          res.send(post);
         } //Redirects to the login page ("index")
     });
 });

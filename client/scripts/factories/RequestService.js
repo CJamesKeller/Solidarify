@@ -33,6 +33,7 @@ getReqs = function() {
 deleteReq = function(reqID) {
   let id = reqID;
   $http.delete("/requests/" + id).then(function(response) {
+    getReqs();
     $location.path("/admin");
   });
 };

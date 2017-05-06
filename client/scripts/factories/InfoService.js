@@ -9,9 +9,13 @@ myApp.factory("InfoService", ["$http", "$location", function($http, $location) {
 /**
 * @param {object} newOrgObj An object containing the new organization info.
 */
-newOrg = function(newOrgObj) {
+newOrg = function(newOrg, newUser) {
+  let newOrgObj = {};
+  newOrgObj.username = newOrg.username;
+  newOrgObj.id = newUser.id;
+  console.log(newOrgObj.id);
   $http.post("/organizations", newOrgObj).then(function(response) {
-      $location.path("/home"); //??? ??? ???
+      $location.path("/home");
   });
 };
 
@@ -28,11 +32,11 @@ getOrgs = function() {
   });
 };
 /**
-* @param {string} orgID Used to find and edit organization info.
+* @param {object} wholeOrg Contains all updates to organization as well as ID.
 */
-editOrg = function(orgID) { //THIS STILL NEEDS TO BE FIXED
-  let id = orgID;
-  $http.put("/organizations/" + id).then(function(response) {
+editOrg = function(wholeOrg) { //THIS STILL NEEDS TO BE FIXED
+  let id = wholeOrg.id;
+  $http.put("/organizations/edit/" + id, {"wholeOrg": wholeOrg}).then(function(response) {
     $location.path("/admin"); //??? ??? ???
   });
 };
@@ -54,7 +58,7 @@ deleteOrg = function(orgID) {
 */
 createEvent = function(newEventObj) {
   return $http.post("/events", newEventObj).then(function(response) {
-      return response;
+    return response;
   });
 };
 
@@ -98,8 +102,8 @@ finishEvent = function(eventID, eventCode) { //THIS STILL NEEDS TO BE FIXED
 */
 deleteEvent = function(eventID) {
   let id = eventID;
-  $http.delete("/events/" + id).then(function(response) {
-    $location.path("/admin"); //??? ??? ???
+  return $http.delete("/events/delete/" + id).then(function(response) {
+    return response;
   });
 };
 

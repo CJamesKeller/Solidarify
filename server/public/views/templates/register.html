@@ -11,15 +11,20 @@
         <label for="password">Password:</label>
         <input type="password" ng-model="user.password" />
     </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" ng-model="orgInfo.email" />
+    </div>
+    <div>
+        <label for="website">Website:</label>
+        <input type="website" ng-model="orgInfo.website" />
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <input type="description" ng-model="orgInfo.desc" />
+    </div>
     <input class="btn btn-default" type="submit" name="submit" value="Register" />
     <a href="#home">Cancel</a>
   </form>
-
-  <div class="fromNEV">
-    <p>
-      <input id="email-resend" type="text" placeholder="Email" ng-model="emailResend">
-      <button ng-click="resend(emailResend)">Resend Verification Email</button>
-    </p>
-  </div>
 
 </div>

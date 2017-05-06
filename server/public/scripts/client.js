@@ -26,11 +26,11 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     .when("/register", {
       templateUrl: "/views/templates/register.html",
       controller: "RegisterController",
-      resolve: {
-        permit : function(PermissionService) {
-          return PermissionService.canRegister;
-        }
-      }
+      // resolve: {
+      //   permit : function(PermissionService) {
+      //     return PermissionService.canRegister;
+      //   }
+      // }
     })
     .when("/org", {
       templateUrl: "/views/templates/organization.html",
