@@ -4,6 +4,10 @@ myApp.controller("OrgController",
   function($scope, $http, $location, LoginService, MailService, InfoService,
   PermissionService) {
 
+  let chosen = {
+    chosenArray: []
+  };
+
   //INFO FUNCTIONALITY
     //ORGANIZATIONS
   InfoService.getOrgs();

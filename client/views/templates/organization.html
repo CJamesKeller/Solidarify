@@ -65,10 +65,18 @@
                 <button ng-click="showOrgs = false"
                   type="button" name="button">X</button>
                 <div class="allOrgs">
-                  <div class="thisOrg" ng-repeat="someOrg in allOrgs.orgArray">
-                    <button ng-click="collabs.orgsArray.push(someOrg._id)"
-                      type="button" name="button">{{someOrg.name}}</button>
+                  <div class="thisOrg" ng-repeat="someOrg in allOrgs.orgArray"
+                    ng-hide="selectedCollab">
+                    <button ng-click="selectedCollab = true;
+                      collabs.orgsArray.push(someOrg._id)" type="button"
+                      name="button">{{someOrg.name}}</button>
                   </div>
+                  <!-- <div class="chosen">
+                    <p>Chosen:</p>
+                    <div ng-repeat="thisspecialOrg in chosen.chosenArray">
+                      <p>{{thisspecialOrg.name}}</p>
+                    </div>
+                  </div> -->
                 </div>
               </div>
           </div>
