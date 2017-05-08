@@ -46,7 +46,7 @@
 }
 
 /*REPEATS FORMATTING*/
-.thisRequest, .thisEvent, .editOrgWrap, .newEventCreator{
+.thisRequest, .thisEvent, .editOrgWrap, .newEventCreator, .thisOrg{
   background: rgba(128, 128, 128, 0.4);
   padding: 10px;
 }

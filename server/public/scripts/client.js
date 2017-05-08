@@ -2,7 +2,7 @@
 * @fileoverview Routes pages w/ resolves as applicable.
 * @author Christopher Keller
 */
-let myApp = angular.module("myApp", ["ngRoute"]);
+let myApp = angular.module("myApp", ["ngRoute", "xeditable"]);
 
 myApp.config(["$routeProvider", function($routeProvider ) {
   $routeProvider
@@ -58,3 +58,7 @@ myApp.config(["$routeProvider", function($routeProvider ) {
       redirectTo: "index"
     });
 }]);
+
+myApp.run(function(editableOptions) {
+  editableOptions.theme = 'bs3';
+});

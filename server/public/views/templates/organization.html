@@ -93,12 +93,27 @@
         <h2>Your Events:</h2>
         <div class="eventWrap" ng-repeat="event in myEvents.eventsArray">
           <div class="thisEvent borderThis">
-            <span class="blackText">Name:</span><p>{{event.name}}</p>
-            <span class="blackText">Date:</span><p>{{event.time}}</p>
-            <span class="blackText">Collaborators:</span><p>{{event.orgs}}</p>
-            <span class="blackText">Description:</span><p>{{event.desc}}</p>
-            <!-- ***EDIT HERE NOT YET WORKING*** -->
-            <button type="button" name="button" ng-click="openEditEvent()">EDIT</button>
+            <span class="blackText">Name:</span>
+              <p editable-text="event.name" e-form="editName"
+                onaftersave="editEvent(event)">{{event.name}}</p>
+              <button class="btn btn-default" ng-click="editName.$show()"
+                ng-hide="editName.$visible">edit</button>
+            <br>
+            <span class="blackText">Date:</span>
+              <p editable-text="event.time" e-form="editDate"
+                onaftersave="editEvent(event)">{{event.time}}</p>
+              <button class="btn btn-default" ng-click="editDate.$show()"
+                ng-hide="editDate.$visible">edit</button>
+            <br>
+            <span class="blackText">Collaborators:</span>
+              <p>{{event.orgs}}</p>
+            <br>
+            <span class="blackText" e-form="editDesc">Description:</span>
+              <p editable-textarea="event.desc" e-form="editDesc"
+                onaftersave="editEvent(event)">{{event.desc}}</p>
+              <button class="btn btn-default" ng-click="editDesc.$show()"
+                ng-hide="editDesc.$visible">edit</button>
+            <br>
             <button type="button" name="button" ng-click="deleteEvent(event._id)">DELETE</button>
           </div>
         </div>

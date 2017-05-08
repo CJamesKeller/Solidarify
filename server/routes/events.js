@@ -98,20 +98,20 @@ router.post("/", function(req, res) {
 /**
  * @returns {object} The updated event.
  */
-router.put("/edit/:id", function(req, res) {
-  let id = req.params.id;
-  Events.findById(req.params.id, function(err, updatedEvent) {
+router.put("/edit", function(req, res) {
+  let id = req.body._id;
+  Events.findById(id, function(err, updatedEvent) {
     if ( err ) {
       console.log(err);
       res.sendStatus(500);
     }
     else {
-      thisEvent.name    = req.body.name     || thisEvent.name;
-      thisEvent.time    = req.body.time     || thisEvent.time;
-      thisEvent.desc    = req.body.desc     || thisEvent.desc;
-      thisEvent.creator = req.body.creator  || thisEvent.creator;
-      thisEvent.code    = req.body.code     || thisEvent.code;
-      thisEvent.orgs    = req.body.orgs     || thisEvent.orgs;
+      updatedEvent.name    = req.body.name     || updatedEvent.name;
+      updatedEvent.time    = req.body.time     || updatedEvent.time;
+      updatedEvent.desc    = req.body.desc     || updatedEvent.desc;
+      updatedEvent.creator = req.body.creator  || updatedEvent.creator;
+      updatedEvent.code    = req.body.code     || updatedEvent.code;
+      updatedEvent.orgs    = req.body.orgs     || updatedEvent.orgs;
       updatedEvent.save(function(err, updatedEvent) {
         if ( err ) {
           console.log(err);

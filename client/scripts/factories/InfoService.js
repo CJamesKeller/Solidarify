@@ -78,10 +78,9 @@ getEvents = function() {
 /**
 * @param {string} eventID Used to find and edit event info.
 */
-editEvent = function(eventID) { //THIS STILL NEEDS TO BE FIXED
-  let id = eventID;
-  $http.put("/events/" + id).then(function(response) {
-    $location.path("/admin"); //??? ??? ???
+editEvent = function(editedOrg) {
+  $http.put("/events/edit", editedOrg).then(function(response) {
+    $location.path("/org");
   });
 };
 

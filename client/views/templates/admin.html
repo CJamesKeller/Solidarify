@@ -4,69 +4,89 @@
     <div class="col-xs-6 logout"><button class="btn btn-default" ng-click="logout()">Log Out</button></div>
     <h1 id="welcome" class="col-xs-12 lead">Welcome, {{userObject.userName}}!</h1>
 
-    <!-- SHOW CURRENT REQUESTS -->
-    <div class="requests col-xs-12">
-      <h3>PENDING REQUESTS:</h3>
-      <div class="reqWrap col-xs-4" ng-repeat="request in allReqs.reqArray">
-        <div class="thisRequest">
-          <h4><span class="blackText">Name:</span>{{request.name}}</h4>
-          <p><span class="blackText">Email:</span>{{request.email}}</p>
-          <p><span class="blackText">Website:</span>{{request.site}}</p>
-          <p><span class="blackText">Description:</span>{{request.desc}}</p>
-          <button class="btn btn-sm btn-default" ng-click="deleteReq(request._id)"
-            type="button" name="deleteButton">DELETE</button>
-          <button class="btn btn-sm btn-default"
-            ng-click="createInvite(request.email); deleteReq(request._id)" type="button" 
-            name="inviteButton">INVITE</button>
+    <div class="business col-xs-4">
+      <!-- SHOW CURRENT REQUESTS -->
+      <div class="requests col-xs-12">
+        <h3>PENDING REQUESTS:</h3>
+        <div class="reqWrap col-xs-12" ng-repeat="request in allReqs.reqArray">
+          <div class="thisRequest">
+            <h4><span class="blackText">Name:</span>{{request.name}}</h4>
+            <p><span class="blackText">Email:</span>{{request.email}}</p>
+            <p><span class="blackText">Website:</span>{{request.site}}</p>
+            <p><span class="blackText">Description:</span>{{request.desc}}</p>
+            <button class="btn btn-sm btn-default" ng-click="deleteReq(request._id)"
+              type="button" name="deleteButton">DELETE</button>
+            <button class="btn btn-sm btn-default"
+              ng-click="createInvite(request.email); deleteReq(request._id)" type="button"
+              name="inviteButton">INVITE</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- EMAIL TO AN ORGANIZATION -->
-    <!-- ***NOT YET AUTO-POPULATED*** -->
-    <div class="col-xs-12">
-      <h2>Send Email:</h2>
-        <form novalidate ng-submit="submitEmailForm(mailObject)">
-          Send Email To:<br>
-          <input type="text" ng-model="mailObject.toEmail"><br>
-          Subject:<br>
-          <input type="text" ng-model="mailObject.subject"><br>
-          Message:<br>
-          <input type="text" ng-model="mailObject.message"><br>
-          <button>Submit</button><br>
-          <br>
-        </form>
+      <!-- EMAIL TO AN ORGANIZATION -->
+      <div class="col-xs-12">
+        <h2>Send Email:</h2>
+          <form novalidate ng-submit="submitEmailForm(mailObject)">
+            Send Email To:
+            <br>
+            <input type="text" ng-model="mailObject.toEmail">
+            <br>
+            Subject:
+            <br>
+            <input type="text" ng-model="mailObject.subject">
+            <br>
+            Message:
+            <br>
+            <textarea name="name" rows="8" cols="25"
+              ng-model="mailObject.message"></textarea>
+            <br>
+            <button>Submit</button><br>
+            <br>
+          </form>
+      </div>
+
     </div>
 
     <!-- SHOW ALL ORGANIZATIONS -->
-    <div class="orgsCol col-xs-6">
+    <div class="orgsCol col-xs-4">
       <h2>Organizations:</h2>
 
-      <div ng-repeat="org in allOrgs" class="thisOrg">
-        <span>{{org.name}}</span>
-        <span>{{org.email}}</span>
-        <span>{{org.site}}</span>
-        <span>{{org.desc}}</span>
-        <span><button ng-click="deleteOrg(org._id)" type="button"
-          name="deleteOrg">DELETE</button></span>
+      <div ng-repeat="org in allOrgs.orgArray" class="extraLayer">
+        <div class="thisOrg borderThis">
+          <span><span class="blackText">Name:</span>{{org.name}}</span>
+          <br>
+          <span><span class="blackText">Email:</span>
+            <a ng-href="mailto:{{org.email}}">{{org.email}}</a></span>
+            <br>
+          <span><span class="blackText">Website:</span>
+            <a ng-href="{{org.site}}">{{org.site}}</a></span>
+            <br>
+          <span><span class="blackText">Description:</span>{{org.desc}}</span>
+        </div>
       </div>
 
     </div>
 
     <!-- SHOW ALL EVENTS -->
-    <div class="eventsCol col-xs-6">
+    <div class="eventsCol col-xs-4">
       <h2>Events:</h2>
       <!-- <div class="possibleCalendar">
         Possible Calendar?
       </div> -->
 
-      <div ng-repeat="event in allEvents" class="thisEvent">
-        <span>{{event.name}}</span>
-        <span>{{event.time}}</span>
-        <span>{{event.desc}}</span>
-        <span>{{event.orgs}}</span>
-        <span><button ng-click="deleteEvent(event._id)" type="button"
-          name="deleteEvent">DELETE</button></span>
+      <div ng-repeat="event in allEvents.eventArray" class="extraLayer">
+        <div class="thisEvent borderThis">
+          <span><span class="blackText">Name:</span>{{event.name}}</span>
+          <br>
+          <span><span class="blackText">Time:</span>{{event.time}}</span>
+          <br>
+          <span><span class="blackText">Description:</span>{{event.desc}}</span>
+          <br>
+          <span><span class="blackText">Collaborators:</span>{{event.orgs}}</span>
+          <br>
+          <span><button ng-click="deleteEvent(event._id)" type="button"
+            name="deleteEvent">DELETE</button></span>
+        </div>
       </div>
 
     </div>

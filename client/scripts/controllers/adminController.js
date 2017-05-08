@@ -13,13 +13,13 @@ myApp.controller("AdminController",
     //ORGANIZATIONS
   InfoService.getOrgs();
   $scope.newOrg     = InfoService.newOrg;
-  $scope.allOrgs    = InfoService.allOrgs.orgArray;
+  $scope.allOrgs    = InfoService.allOrgs;
   $scope.editOrg    = InfoService.editOrg;
   $scope.deleteOrg  = InfoService.deleteOrg;
     //EVENTS
   InfoService.getEvents();
   $scope.newEvent     = InfoService.newEvent;
-  $scope.allEvents    = InfoService.allEvents.eventArray;
+  $scope.allEvents    = InfoService.allEvents;
   $scope.editEvent    = InfoService.editEvent;
   $scope.deleteEvent  = InfoService.deleteEvent;
 
