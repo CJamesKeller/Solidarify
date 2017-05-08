@@ -62,14 +62,14 @@
             <button ng-click="showOrgs = true" class="btn btn-sm btn-default"
               type="button" name="button">Expand</button>
               <div class="wrapOrgs" ng-show="showOrgs">
+                <button ng-click="showOrgs = false"
+                  type="button" name="button">X</button>
                 <div class="allOrgs">
-                  <div class="thisOrg" ng-repeat="someOrg in allOrgs">
-                    <button ng-click="orgsArray.push(someOrg._id)"
+                  <div class="thisOrg" ng-repeat="someOrg in allOrgs.orgArray">
+                    <button ng-click="collabs.orgsArray.push(someOrg._id)"
                       type="button" name="button">{{someOrg.name}}</button>
                   </div>
                 </div>
-                <button ng-click="showOrgs = false"
-                  type="button" name="button">COLLAPSE</button>
               </div>
           </div>
           <br>
@@ -81,7 +81,8 @@
             </textarea>
           </div>
           <button type="button" name="button"
-            ng-click="newEvent.creator = userObject.id; makeAndSend(newEvent, orgsArray)">
+            ng-click="newEvent.creator = userObject.id;
+              newEvent.orgs = collabs.orgsArray; makeAndSend(newEvent)">
             Create!</button>
         </form>
       </div>

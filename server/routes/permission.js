@@ -72,11 +72,11 @@ router.put('/join/:code', function(req, res) {
  */
 router.put('/collaborate/:code', function(req, res) {
   let code = req.params.code;
-  Permission.findOne({ 'code': code }, function(err, foundPermission) {
+  Permission.findOne({ 'code': code.tempCode }, function(err, foundPermission) {
       if ( err ) {
         res.sendStatus(500);
       }
-      foundPermission.users.push(req.user._id);
+      foundPermission.users.push(code.orgID);
       foundPermission.save(function(err, savedPermission) {
         if ( err ) {
           res.sendStatus(500);

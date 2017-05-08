@@ -55,7 +55,6 @@ let transporter = nodemailer.createTransport({
 });
 app.post("/mail", function(req,res) {
     let mailer = req.body;
-    console.log(mailer);
     let mailOptions = {
         // Formatted as: ' "NAME" EMAIL ' (w/single q's, too)
         from:     ' "Solidarify Admin" ' + configVars.emailAddress + ' ',

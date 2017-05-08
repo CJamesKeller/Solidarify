@@ -11,6 +11,9 @@ myApp.controller("OrgController",
   $scope.allOrgs = InfoService.allOrgs;
   $scope.editOrg = InfoService.editOrg;
   $scope.deleteOrg = InfoService.deleteOrg;
+  $scope.collabs = {
+    orgsArray: []
+  };
     //EVENTS
   $scope.allEvents = InfoService.allEvents;
   $scope.editEvent = InfoService.editEvent;
@@ -59,15 +62,18 @@ myApp.controller("OrgController",
 
   //PERMISSION FUNCTIONALITY
   $scope.newGroup = {};
-  $scope.makeAndSend = function(newEvent, collaborators) {
-    newEvent.orgs = collaborators;
+  $scope.makeAndSend = function(newEvent) {
     InfoService.createEvent(newEvent)
     .then(function(createdEvent) {
-      let newEventID = createdEvent.data._id;
-      if ( collaborators ) {
-        findCollaborators(collaborators)
-        .then(function(eventCode){
-          InfoService.finishEvent(newEventID, eventCode);
+      if ( newEvent.orgs ) {
+        let newEventID,
+            newInviteCode;
+        newEventID = createdEvent.data._id;
+        PermissionService.createInvite()
+        .then(function(newInviteObj) {
+          newInviteCode = newInviteObj.data.code;
+          InfoService.finishEvent(newEventID, newInviteCode);
+          findCollaborators(newEvent.orgs, newInviteCode);
         });
       }
     });
@@ -78,46 +84,33 @@ myApp.controller("OrgController",
    * @param {array} orgsArray Contains all selected collaborator orgs ID's.
    * @returns {array} Contains all selected collaborator organizations' info.
    */
-  findCollaborators = function(orgsArray) {
-    let numOrgs = 0,
-        collabPromiseArray,
-        thisEventCode;
+  findCollaborators = function(orgsArray, newInviteCode) {
+    console.log("the code: ", newInviteCode);
+    let numOrgs = 0;
     numOrgs = orgsArray.length;
     for (i = 0; i < numOrgs; i++) {
-      $http.get("/organizations/array", orgsArray[i])
+      $http.get("/organizations/collab/" + orgsArray[i])
       .then(function(response) {
-        collabPromiseArray.push(sendConfirmation(response));
+        sendConfirmation(response, newInviteCode);
       });
     }
-    return Promise.all(collabPromiseArray)
-    .then(function(thisEventCode){
-      return thisEventCode;
-    });
   };
 
   /**
    * @param {array} collaborators Contains all selected collaborator org info.
    * @returns {string} The event-specific invitation code.
    */
-  sendConfirmation = function(collaborators) {
+  sendConfirmation = function(collaborator, InviteCode) {
     let mailPromiseArray,
-        newInviteObj  = PermissionService.createInvite(),
-        newInviteCode = newInviteObj.code,
-        numOrgs = collaborators.length;
-    for (i = 0; i < numOrgs; i++) {
-      let email = collaborators[i].email,
-          mailObject = {
-        toEmail: email,
+        mailObject;
+    mailObject = {
+        toEmail: collaborator.data.email,
         subject: "Confirm Collaboration",
         message: "Please click the link to confirm collaboration: <a href='" +
-          $scope.baseURL + "/#/collaborate/" + newInviteCode + "'>Register</a>."
-      };
-      mailPromiseArray.push(MailService.sendEmail(mailObject));
-    }
-    return Promise.all(mailPromiseArray)
-    .then(function(){
-      return newInviteCode;
-    });
+          $scope.baseURL + "/#/collaborate/" + InviteCode + "/" +
+          collaborator.data.userID + "'>Register</a>."
+    };
+    MailService.sendEmail(mailObject);
   };
 
   $scope.groups = PermissionService.groups;

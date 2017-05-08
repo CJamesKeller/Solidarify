@@ -52,8 +52,8 @@ router.get("/", function(req, res) {
 /**
  * @returns {object} Contains all potential collaborator organization objects.
  */
-router.get("/array", function(req, res) {
-  let orgID = req.body._id;
+router.get("/collab/:id", function(req, res) {
+  let orgID = req.params.id;
   Organizations.findOne({ "_id": orgID}, function(err, thisOrg) {
     if ( err ) {
       console.log(err);

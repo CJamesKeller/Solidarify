@@ -27,8 +27,8 @@ myApp.factory('PermissionService',
    * @param {object} user The organization confirming collaboration.
    * @param {string} permissionCode The verification of permission.
    */
-  collaborate = function(permissionCode) {
-    $http.put('/permission/collaborate/' + permissionCode )
+  collaborate = function(code) {
+    $http.put('/permission/collaborate/' + code )
     .then(function(response) {
       code.tempCode = undefined;
       return response;
@@ -40,7 +40,6 @@ myApp.factory('PermissionService',
    */
   createInvite = function() {
     return $http.post('/permission/create').then(function(response) {
-      getGroups();
       return response;
     });
   };

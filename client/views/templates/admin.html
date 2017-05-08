@@ -11,8 +11,12 @@
         <div class="reqWrap col-xs-12" ng-repeat="request in allReqs.reqArray">
           <div class="thisRequest">
             <h4><span class="blackText">Name:</span>{{request.name}}</h4>
-            <p><span class="blackText">Email:</span>{{request.email}}</p>
-            <p><span class="blackText">Website:</span>{{request.site}}</p>
+            <span class="blackText">Email:</span>
+              <a ng-href="mailto:{{request.email}}">{{request.email}}</a>
+            <br>
+            <span class="blackText">Website:</span>
+              <a ng-href="http://www.{{request.site}}">{{request.site}}</a>
+            <br>
             <p><span class="blackText">Description:</span>{{request.desc}}</p>
             <button class="btn btn-sm btn-default" ng-click="deleteReq(request._id)"
               type="button" name="deleteButton">DELETE</button>
@@ -59,7 +63,7 @@
             <a ng-href="mailto:{{org.email}}">{{org.email}}</a></span>
             <br>
           <span><span class="blackText">Website:</span>
-            <a ng-href="{{org.site}}">{{org.site}}</a></span>
+            <a ng-href="http://www.{{org.site}}">{{org.site}}</a></span>
             <br>
           <span><span class="blackText">Description:</span>{{org.desc}}</span>
         </div>

@@ -154,20 +154,16 @@ router.put("/finish/:id", function(req, res) {
 /**
  * @returns {object} The updated event.
  */
-router.put("/collaborate/:code", function(req, res) {
-  let code = req.params.code;
-  Events.find({"code": code}, function(err, updatedEvent) {
+router.put("/collaborate/:eventCode", function(req, res) {
+  let eventCode = req.params.eventCode;
+  let orgID = req.body.orgID;
+  Events.findOne({"code": eventCode}, function(err, updatedEvent) {
     if ( err ) {
       console.log(err);
       res.sendStatus(500);
     }
     else {
-      thisEvent.name    = req.body.name     || thisEvent.name;
-      thisEvent.time    = req.body.time     || thisEvent.time;
-      thisEvent.desc    = req.body.desc     || thisEvent.desc;
-      thisEvent.creator = req.body.creator  || thisEvent.creator;
-      thisEvent.code    = req.body.code     || thisEvent.code;
-      thisEvent.orgs    = req.body.orgs     || thisEvent.orgs;
+      thisEvent.orgs.push(orgID);
       updatedEvent.save(function(err, updatedEvent) {
         if ( err ) {
           console.log(err);

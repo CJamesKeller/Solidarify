@@ -26,7 +26,7 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     .when("/register", {
       templateUrl: "/views/templates/register.html",
       controller: "RegisterController",
-      // resolve: {
+      // resolve: {                                 //FIX THIS ***
       //   permit : function(PermissionService) {
       //     return PermissionService.canRegister;
       //   }
@@ -41,14 +41,9 @@ myApp.config(["$routeProvider", function($routeProvider ) {
         }
       }
     })
-    .when('/collaborate/:code', {
+    .when("/collaborate/:code/:id", {
       templateUrl: '/views/templates/collaborate.html',
       controller: 'CollaborateController',
-      resolve: {
-        getuser : ['UserService', function(UserService){
-          return UserService.getuser();
-        }]
-      }
     })
     // .when("/search", {
     //   templateUrl: "/views/templates/search.html",

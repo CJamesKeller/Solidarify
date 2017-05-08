@@ -19,14 +19,20 @@ myApp.controller('CollaborateController',
    * @param {string} code The event permission allowing collaboration.
    */
   $scope.collaborate  = function(code) {
-    let orgs = PermissionService.collaborate(code);
-    $http.put("/events/collaborate/" + code, {"orgs": orgs}).then(function() {
-      $location.path("/home");
+    PermissionService.collaborate(code).then(function(response) {
+      console.log(response); //we need the permission id as it is the event code
+      //we will then use this code to find the event by it and add this orgID
+      let eventCode = response.data._id;
+      $http.put("/events/collaborate/" + eventCode, {"orgID": code.orgID})
+      .then(function(response) {
+        $location.path("/home");
+      });
     });
   };
 
   if ( $routeParams.code !== undefined ) {
     $scope.code.tempCode = $routeParams.code;
+    $scope.code.orgID = $routeParams.id;
   }
   // Else bounce user to log in screen
 }]);
