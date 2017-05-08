@@ -37,14 +37,15 @@ router.get("/", function(req, res) {
 /**
  * @returns {object} Contains all organization objects.
  */
-router.get("/", function(req, res) {
-  Organizations.find({}, function(err, allOrganizations) { //{key: value}
+router.get("/this/:id", function(req, res) {
+  console.log(req.params.id);
+  Organizations.find({"userID": req.params.id}, function(err, thisOrg) { //{key: value}
     if ( err ) {
       console.log(err);
       res.sendStatus(500);
     }
     else {
-      res.send(allOrganizations);
+      res.send(thisOrg);
     }
   });
 });
@@ -92,18 +93,17 @@ router.post("/", function(req, res) {
  */
 router.put("/edit/:id", function(req, res) {
   let id = req.params.id;
-  console.log(id);
   Organizations.findById(req.params.id, function(err, updatedOrg) {
-    console.log(updatedOrg);
     if ( err ) {
       console.log(err);
       res.sendStatus(500);
     }
     else {
-      updatedOrg.name   = req.body.name   || updatedOrg.name;
-      updatedOrg.email  = req.body.email  || updatedOrg.email;
-      updatedOrg.site   = req.body.site   || updatedOrg.site;
-      updatedOrg.desc   = req.body.desc   || updatedOrg.desc;
+      console.log("req.body: ", req.body);
+      updatedOrg.name   = req.body.wholeOrg.name   || updatedOrg.name;
+      updatedOrg.email  = req.body.wholeOrg.email  || updatedOrg.email;
+      updatedOrg.site   = req.body.wholeOrg.site   || updatedOrg.site;
+      updatedOrg.desc   = req.body.wholeOrg.desc   || updatedOrg.desc;
       updatedOrg.save(function(err, savedOrg) {
         if ( err ) {
           console.log(err);

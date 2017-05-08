@@ -18,6 +18,20 @@ myApp.controller("OrgController",
   $scope.collabs = {
     orgsArray: []
   };
+  $scope.thisOrg = {};
+  getThisOrg = function() {
+    LoginService.getuser()
+    .then(function(response) {
+      thisUser = LoginService.userObject;
+      if ( thisUser.id ) {
+        let orgID = thisUser.id;
+        $http.get("/organizations/this/" + orgID).then(function(response) {
+          $scope.thisOrg = response.data[0];
+        });
+      }
+    });
+  };
+  getThisOrg();
     //EVENTS
   $scope.allEvents = InfoService.allEvents;
   $scope.editEvent = InfoService.editEvent;

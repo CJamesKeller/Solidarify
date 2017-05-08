@@ -35,9 +35,10 @@ getOrgs = function() {
 * @param {object} wholeOrg Contains all updates to organization as well as ID.
 */
 editOrg = function(wholeOrg) { //THIS STILL NEEDS TO BE FIXED
-  let id = wholeOrg.id;
+  let id = wholeOrg._id;
+  console.log(wholeOrg);
   $http.put("/organizations/edit/" + id, {"wholeOrg": wholeOrg}).then(function(response) {
-    $location.path("/admin"); //??? ??? ???
+    return response;
   });
 };
 
