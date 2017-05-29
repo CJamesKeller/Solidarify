@@ -4,7 +4,6 @@
 */
 
 let bodyParser    = require("body-parser"),
-    configVars    = require("../config.json"),
     db            = require("./modules/db.js"),
     events        = require("./routes/events.js"),
     express       = require("express"),
@@ -18,7 +17,8 @@ let bodyParser    = require("body-parser"),
     register      = require("./routes/register"),
     requests      = require("./routes/requests.js"),
     session       = require("express-session"),
-    user          = require("./routes/user");
+    user          = require("./routes/user"),
+    configVars;
 
 app.set("port", (process.env.PORT || 5000));
 app.use(bodyParser.json());
@@ -36,7 +36,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 // NODEMAILER
+if ( !process.env.MAILADDR ) {
+  configVars = require("../config.json");
+}
+
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
