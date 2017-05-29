@@ -5,7 +5,6 @@
 
   <div class="row">
     <!-- EDIT ORG INFO -->
-    <!-- ***NOT YET WORKING*** -->
     <div class="col-xs-12 col-md-4 editOrgInfo">
       <div class="editOrgWrap borderThis">
         <h2>Edit your info:</h2>
@@ -59,7 +58,6 @@
             <span class="blackText">Name:</span>
             <input type="text" name="newEventName" value=""
               placeholder="Event name" ng-model="newEvent.name">
-        <!-- ***THE ABOVE ISN'T WORKING RIGHT*** -->
           </div>
           <div>
             <span class="blackText">Date:</span>
@@ -81,12 +79,6 @@
                       collabs.orgsArray.push(somethisOrg_id)" type="button"
                       name="button">{{somethisOrgname}}</button>
                   </div>
-                  <!-- <div class="chosen">
-                    <p>Chosen:</p>
-                    <div ng-repeat="thisspecialOrg in chosen.chosenArray">
-                      <p>{{thisspecialthisOrgname}}</p>
-                    </div>
-                  </div> -->
                 </div>
               </div>
           </div>

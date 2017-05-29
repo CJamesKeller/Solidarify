@@ -65,8 +65,8 @@ module.exports = function(grunt){
               "js/xeditable.js"],
         dest: "server/public/vendors/xeditable/"
       }
-      // jQuery-UI added manually
-      // Unsure about Nodemailer...
+      // jQuery-UI added manually to Vendors folder
+      // Nodemailer not brought into Vendors
     },
     watch: {
       files: [

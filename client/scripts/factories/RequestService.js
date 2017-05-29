@@ -39,10 +39,10 @@ deleteReq = function(reqID) {
 };
 
   return {
-    newRequest: newRequest,
-    getReqs:    getReqs,
     allReqs:    allReqs,
-    deleteReq:  deleteReq
+    deleteReq:  deleteReq,
+    getReqs:    getReqs,
+    newRequest: newRequest
   };
 
 }]);

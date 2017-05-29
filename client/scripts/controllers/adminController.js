@@ -9,21 +9,22 @@ myApp.controller("AdminController",
   $scope.allReqs    = RequestService.allReqs;
   $scope.deleteReq  = RequestService.deleteReq;
 
-  //INFO FUNCTIONALITY
-    //ORGANIZATIONS
+  //ORGANIZATIONS
   InfoService.getOrgs();
-  $scope.newOrg     = InfoService.newOrg;
   $scope.allOrgs    = InfoService.allOrgs;
-  $scope.editOrg    = InfoService.editOrg;
   $scope.deleteOrg  = InfoService.deleteOrg;
-    //EVENTS
+  $scope.editOrg    = InfoService.editOrg;
+  $scope.newOrg     = InfoService.newOrg;
+
+  //EVENTS
   InfoService.getEvents();
-  $scope.newEvent     = InfoService.newEvent;
   $scope.allEvents    = InfoService.allEvents;
-  $scope.editEvent    = InfoService.editEvent;
   $scope.deleteEvent  = InfoService.deleteEvent;
+  $scope.editEvent    = InfoService.editEvent;
+  $scope.newEvent     = InfoService.newEvent;
 
   //MAILER FUNCTIONALITY
+  
   /**
    * @param {object} info Contains the email address and message to be sent.
    */

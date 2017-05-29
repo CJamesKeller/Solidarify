@@ -3,40 +3,32 @@
 * @author Christopher Keller
 */
 
-//REQUIRES:
-//*********
-    //INITIAL
-let express       = require("express"),
-    app           = express(),
-    path          = require("path"),
-    bodyParser    = require("body-parser"),
-    db            = require("./modules/db.js"),
-    //NODEMAILER
-    nodemailer    = require("nodemailer"),
-    //PASSPORT
-    passport      = require("./strategies/userStrategy"),
-    session       = require("express-session"),
-    //PASSPORT ROUTES
-    register      = require("./routes/register"),
-    user          = require("./routes/user"),
-    index         = require("./routes/index"),
-    //MY PROJECT ROUTES
+let bodyParser    = require("body-parser"),
     configVars    = require("../config.json"),
-    requests      = require("./routes/requests.js"),
-    organizations = require("./routes/organizations.js"),
+    db            = require("./modules/db.js"),
     events        = require("./routes/events.js"),
-    permission    = require("./routes/permission.js");
+    express       = require("express"),
+    app           = express(),
+    index         = require("./routes/index"),
+    nodemailer    = require("nodemailer"),
+    organizations = require("./routes/organizations.js"),
+    passport      = require("./strategies/userStrategy"),
+    path          = require("path"),
+    permission    = require("./routes/permission.js"),
+    register      = require("./routes/register"),
+    requests      = require("./routes/requests.js"),
+    session       = require("express-session"),
+    user          = require("./routes/user");
 
-//APP INITIALIZATION
 app.set("port", (process.env.PORT || 5000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("server/public"));
 
-//***PASSPORT***
+// PASSPORT
 app.use(session({
    secret:  "secret",
-   key:     "user", // this is the name of the req.variable.
+   key:     "user", // the req.variable
    resave:  "true",
    cookie:  { maxage: 60000, secure: false },
    saveUninitialized: false
@@ -44,19 +36,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//***NODEMAILER***
+// NODEMAILER
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: configVars.emailAddress, //EMAIL
-        pass: configVars.password  //PASSWORD
-        //*** process.env.MAILPASS || *** FOR HEROKU
+        user: process.env.MAILADDR || configVars.emailAddress,
+        pass: process.env.MAILPASS || configVars.password
     }
 });
 app.post("/mail", function(req,res) {
     let mailer = req.body;
     let mailOptions = {
-        // Formatted as: ' "NAME" EMAIL ' (w/single q's, too)
+        // Formatted as: ' "NAME" EMAIL ' (w/single quotes, too)
         from:     ' "Solidarify Admin" ' + configVars.emailAddress + ' ',
         to:       mailer.toEmail,
         subject:  mailer.subject,
@@ -71,24 +62,20 @@ app.post("/mail", function(req,res) {
     res.send(200);
 });
 
-//PROJECT ROUTES
-app.use("/requests", requests);
-app.use("/organizations", organizations);
 app.use("/events", events);
-app.use("/register", register);
-app.use("/user", user);
+app.use("/organizations", organizations);
 app.use("/permission", permission);
+app.use("/register", register);
+app.use("/requests", requests);
+app.use("/user", user);
 app.use("/*", index);
 
-//INDEX GET ROUTE
 app.get("/", function(req, res) {
   res.sendFile(path.resolve("server/public/views/index.html"));
 });
 
-//LISTENING TO PORT
 app.listen(app.get("port"), function() {
     console.log("Listening on port: ", app.get("port"));
 });
 
-//EXPORT MODULE
 module.exports = app;

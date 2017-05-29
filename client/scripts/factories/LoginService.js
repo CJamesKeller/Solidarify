@@ -8,12 +8,10 @@ myApp.factory("LoginService", ["$http", "$location", function($http, $location) 
     getuser : function() {
       return $http.get("/user").then(function(response) {
           if ( response.data.username ) {
-              // user has a curret session on the server
               userObject.userName = response.data.username;
               userObject.id = response.data._id;
           }
           else {
-              // user has no session, bounce them back to the login page
               $location.path("/home");
           }
       });
@@ -26,7 +24,6 @@ myApp.factory("LoginService", ["$http", "$location", function($http, $location) 
               $location.path("/admin");
           }
           else {
-              // user has no session, bounce them back to the login page
               $location.path("/home");
           }
       });

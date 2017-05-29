@@ -1,7 +1,5 @@
-//*** FIX COMMENTS ***
-
-let passport      = require("passport"),
-    localStrategy = require("passport-local").Strategy,
+let localStrategy = require("passport-local").Strategy,
+    passport      = require("passport"),
     User          = require("../models/user");
 
 // Store user's unique id in session
@@ -23,7 +21,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.use("local", new localStrategy({  //This is the method called local
+passport.use("local", new localStrategy({  //The method 'local'
   passReqToCallback: true,
   usernameField: "username"
   }, function(req, username, password, done) {
@@ -31,21 +29,18 @@ passport.use("local", new localStrategy({  //This is the method called local
       if ( err ) {
         throw err;
       }
-      // user passed from Mongoose if match found from findOne() above
-      if ( !user ) {
+      else if ( !user ) {
         return done(null, false, {message: "Incorrect credentials."});
       }
       else {
-        // check password
-        // comparePassword() defined in model file
+        // comparePassword() is defined in model file
         user.comparePassword(password, function(err, isMatch) {
           if ( err ) {
             throw err;
           }
-          if ( isMatch ) {
+          else if ( isMatch ) {
             return(done(null, user));
-            //user.js in models decides what to do
-            //with info (like go to next), with user
+            // user.js model determines what to do with user info
           }
           else {
             done(null, false, {message: "Incorrect credentials."});

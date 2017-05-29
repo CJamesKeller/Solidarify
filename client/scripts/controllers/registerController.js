@@ -28,11 +28,11 @@ myApp.controller("RegisterController",
         }
         else {
           $http.post("/organizations", {
-            "id"       : response.data._id,
-            "username" : response.data.username,
+            "desc"     : $scope.orgInfo.desc,
             "email"    : $scope.orgInfo.email,
+            "id"       : response.data._id,
             "site"  : $scope.orgInfo.website,
-            "desc"     : $scope.orgInfo.desc
+            "username" : response.data.username
           }).then(function(response) {
               console.log(response);
               $location.path("/home");

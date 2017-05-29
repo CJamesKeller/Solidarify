@@ -7,8 +7,8 @@ let mongoose          = require("mongoose"),
                           password: {type: String, required: true}
                         });
 
-UserSchema.pre("save", function(next) { //"next" is an optional third param
-    let user = this;                    //  made available by node & express
+UserSchema.pre("save", function(next) {
+    let user = this;
 
     if ( !user.isModified("password") ) {
       return next();
@@ -27,9 +27,6 @@ UserSchema.pre("save", function(next) { //"next" is an optional third param
     });
 });
 
-/**
- * @param {string} candidatePassword The password to be compared with database.
- */
 UserSchema.methods.comparePassword = function(candidatePassword, callback) {
     // "this" refers to instance of User model
     // "callback" refers to entire function in userStrategy

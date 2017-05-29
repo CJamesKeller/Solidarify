@@ -1,21 +1,16 @@
 let express   = require('express'),
     router    = express.Router(),
-    mongoose  = require('mongoose'),
     Chance    = require('chance'),
-    chance    = new Chance();
+    chance    = new Chance(),
+    mongoose  = require('mongoose');
 
 let PermissionSchema = mongoose.Schema({
-    name  : {type: String},
     code  : {type: String},
+    name  : {type: String},
     users : {type: Array}
 });
 let Permission = mongoose.model("Permissions", PermissionSchema);
 
-//*** CONFIRM IF ACCURATE ABOUT RETURNS ***
-
-/**
- * @returns {object} Contains all permission objects.
- */
 router.get('/', function(req, res) {
   if ( req.isAuthenticated() ) {
     Permission.find({}, function(err, permissions) {
@@ -27,9 +22,6 @@ router.get('/', function(req, res) {
   }
 });
 
-/**
- * @returns {object} The new saved permission.
- */
 router.post('/create', function(req, res) {
   let name = req.body.name || "newInvitation";
   if ( req.isAuthenticated() ) {
@@ -49,9 +41,6 @@ router.post('/create', function(req, res) {
   }
 });
 
-/**
- * @returns {object} The newly updated permission.
- */
 router.put('/join/:code', function(req, res) {
   let code = req.params.code;
   Permission.findOne({ 'code': code }, function(err, foundPermission) {
@@ -67,9 +56,6 @@ router.put('/join/:code', function(req, res) {
   });
 });
 
-/**
- * @returns {object} The newly updated permission.
- */
 router.put('/collaborate/:code', function(req, res) {
   let code = req.params.code;
   Permission.findOne({ 'code': code.tempCode }, function(err, foundPermission) {

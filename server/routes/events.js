@@ -3,28 +3,22 @@
 * @author Christopher Keller
 */
 
-//BASIC REQUIRES
 let express   = require("Express"),
     router    = express.Router(),
     mongoose  = require("mongoose");
 
-//EVENT SCHEMA
 let EventSchema = mongoose.Schema({
-  name    : String,
-  time    : String, //***Eventually change to Date
-  desc    : String,
-  creator : String,
   code    : String,
-  orgs    : Array
+  creator : String,
+  desc    : String,
+  name    : String,
+  orgs    : Array,
+  time    : String //TODO change to Date
 });
 let Events = mongoose.model("Events", EventSchema);
 
-//CRUD ROUTES (GET, POST, PUT, DELETE)
-/**
- * @returns {object} Contains all event objects.
- */
 router.get("/", function(req, res) {
-  Events.find({}, function(err, allEvents) { //{key: value}
+  Events.find({}, function(err, allEvents) {
     if ( err ) {
       console.log(err);
       res.sendStatus(500);
@@ -35,9 +29,6 @@ router.get("/", function(req, res) {
   });
 });
 
-/**
- * @returns {object} Contains all events for that organization.
- */
 router.get("/my-events/:id", function(req, res) {
   let totalEvents = [],
       currentOrgId = req.params.id;
@@ -66,9 +57,6 @@ router.get("/my-events/:id", function(req, res) {
   });
 });
 
-/**
- * @returns {object} The saved event.
- */
 router.post("/", function(req, res) {
   let uglyTime,
       betterTime,
@@ -78,11 +66,11 @@ router.post("/", function(req, res) {
   betterTime = uglyTime.slice(0, 10);
 
   thisEvent = new Events();
+  thisEvent.code    = "noCode";
+  thisEvent.creator = req.body.creator;
+  thisEvent.desc    = req.body.desc;
   thisEvent.name    = req.body.name;
   thisEvent.time    = betterTime;
-  thisEvent.desc    = req.body.desc;
-  thisEvent.creator = req.body.creator;
-  thisEvent.code    = "noCode";
   thisEvent.orgs    = req.body.orgs || [];
   thisEvent.save(function(err, savedEvent) {
     if ( err ) {
@@ -106,12 +94,12 @@ router.put("/edit", function(req, res) {
       res.sendStatus(500);
     }
     else {
-      updatedEvent.name    = req.body.name     || updatedEvent.name;
-      updatedEvent.time    = req.body.time     || updatedEvent.time;
-      updatedEvent.desc    = req.body.desc     || updatedEvent.desc;
-      updatedEvent.creator = req.body.creator  || updatedEvent.creator;
       updatedEvent.code    = req.body.code     || updatedEvent.code;
+      updatedEvent.creator = req.body.creator  || updatedEvent.creator;
+      updatedEvent.desc    = req.body.desc     || updatedEvent.desc;
+      updatedEvent.name    = req.body.name     || updatedEvent.name;
       updatedEvent.orgs    = req.body.orgs     || updatedEvent.orgs;
+      updatedEvent.time    = req.body.time     || updatedEvent.time;
       updatedEvent.save(function(err, updatedEvent) {
         if ( err ) {
           console.log(err);

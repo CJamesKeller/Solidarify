@@ -1,5 +1,6 @@
 myApp.factory("MailService", ["$http", "$location", function($http, $location) {
   return {
+    
     /**
      * @param {object} info Contains the email address and message to send.
      */

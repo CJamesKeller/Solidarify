@@ -8,17 +8,20 @@ myApp.controller("OrgController",
     chosenArray: []
   };
 
-  //INFO FUNCTIONALITY
-    //ORGANIZATIONS
+  //ORGANIZATIONS
   InfoService.getOrgs();
-  $scope.newOrg = InfoService.newOrg;
-  $scope.allOrgs = InfoService.allOrgs;
-  $scope.editOrg = InfoService.editOrg;
+
+  $scope.allOrgs   = InfoService.allOrgs;
   $scope.deleteOrg = InfoService.deleteOrg;
+  $scope.editOrg   = InfoService.editOrg;
+  $scope.newOrg    = InfoService.newOrg;
+
   $scope.collabs = {
     orgsArray: []
   };
+
   $scope.thisOrg = {};
+
   getThisOrg = function() {
     LoginService.getuser()
     .then(function(response) {
@@ -31,16 +34,20 @@ myApp.controller("OrgController",
       }
     });
   };
+
   getThisOrg();
-    //EVENTS
+
+  //EVENTS
   $scope.allEvents = InfoService.allEvents;
   $scope.editEvent = InfoService.editEvent;
+
   $scope.deleteEvent = function(id) {
     InfoService.deleteEvent(id)
     .then(function(response) {
       getMyEvents();
     });
   };
+
   $scope.myEvents = {
     eventsArray: []
   };
@@ -57,10 +64,12 @@ myApp.controller("OrgController",
       }
     });
   };
+
   getMyEvents();
 
   //MAILER FUNCTIONALITY
   let mailer = this;
+
   /**
    * @param {object} info Contains the message to send to the admin.
    */
@@ -80,6 +89,7 @@ myApp.controller("OrgController",
 
   //PERMISSION FUNCTIONALITY
   $scope.newGroup = {};
+
   $scope.makeAndSend = function(newEvent) {
     InfoService.createEvent(newEvent)
     .then(function(createdEvent) {
@@ -132,7 +142,9 @@ myApp.controller("OrgController",
   };
 
   $scope.groups = PermissionService.groups;
+
   PermissionService.getGroups();
+  
   $scope.baseURL = $location.$$protocol + '://' + $location.$$host + ':' + $location.$$port;
 
 }]);

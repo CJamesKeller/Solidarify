@@ -1,10 +1,10 @@
 myApp.factory('PermissionService',
   ['$http', '$location', '$route', function($http, $location, $route) {
 
-  let code        = {},
-      userObject  = {},
+  let canRegister = false,
+      code        = {},
       groups      = {},
-      canRegister = false;
+      userObject  = {};
 
   getGroups = function(){
     $http.get('/permission/').then(function(response) {
@@ -74,15 +74,15 @@ myApp.factory('PermissionService',
   };
 
   return {
-    userObject : userObject,
+    canRegister: canRegister,
     code: code,
     groups: groups,
-    canRegister: canRegister,
+    userObject : userObject,
     // Functions
-    getuser : getUser,
-    logout : logout,
     createInvite : createInvite,
+    getGroups : getGroups,
+    getuser : getUser,
     joinGroup : joinGroup,
-    getGroups : getGroups
+    logout : logout
   };
 }]);

@@ -12,8 +12,8 @@ myApp.controller('CollaborateController',
   };
   $scope.message = "";
 
-  $scope.logout     = PermissionService.logout;
-  $scope.code       = angular.copy(PermissionService.code);
+  $scope.logout = PermissionService.logout;
+  $scope.code   = angular.copy(PermissionService.code);
 
   /**
    * @param {string} code The event permission allowing collaboration.

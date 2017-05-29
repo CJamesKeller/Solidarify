@@ -6,6 +6,7 @@
 myApp.factory("InfoService", ["$http", "$location", function($http, $location) {
 
 //ORGANIZATIONS
+
 /**
 * @param {object} newOrgObj An object containing the new organization info.
 */
@@ -22,6 +23,7 @@ newOrg = function(newOrg, newUser) {
 let allOrgs = {
   orgArray: []
 };
+
 /**
 * @returns {object} Contains an array of organization objects.
 */
@@ -31,6 +33,7 @@ getOrgs = function() {
     return allOrgs;
   });
 };
+
 /**
 * @param {object} wholeOrg Contains all updates to organization as well as ID.
 */
@@ -53,6 +56,7 @@ deleteOrg = function(orgID) {
 };
 
 //EVENTS
+
 /**
 * @param {object} newEventObj An object containing the new event info.
 * @returns {object} The new event.
@@ -66,6 +70,7 @@ createEvent = function(newEventObj) {
 let allEvents = {
   eventArray: []
 };
+
 /**
 * @returns {object} Contains an array of event objects.
 */
@@ -108,17 +113,17 @@ deleteEvent = function(eventID) {
 };
 
   return {
-    newOrg : newOrg,
-    createEvent : createEvent,
-    getOrgs : getOrgs,
-    allOrgs : allOrgs,
     allEvents : allEvents,
-    getEvents : getEvents,
-    editOrg : editOrg,
-    editEvent : editEvent,
+    allOrgs : allOrgs,
+    createEvent : createEvent,
+    deleteEvent : deleteEvent,
     deleteOrg : deleteOrg,
+    editEvent : editEvent,
+    editOrg : editOrg,
     finishEvent : finishEvent,
-    deleteEvent : deleteEvent
+    getEvents : getEvents,
+    getOrgs : getOrgs,
+    newOrg : newOrg
   };
 
 }]);

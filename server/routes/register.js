@@ -1,10 +1,9 @@
 let express   = require("express"),
     router    = express.Router(),
     passport  = require("passport"),
-    Users     = require("../models/user"),
-    path      = require("path");
+    path      = require("path"),
+    Users     = require("../models/user");
 
-// Handles request for HTML file
 router.get("/", function(req, res) {
   res.sendFile(path.resolve("server/public/views/register.html"));
 });
@@ -13,14 +12,11 @@ router.get("/", function(req, res) {
 router.post("/", function(req, res, next) {
     Users.create(req.body, function(err, post) {
          if ( err ) {
-           // next() routes to routes/index.js
-           next(err);
+           next(err); // to routes/index.js
          }
          else {
-          // route a new GET "/" request
-          console.log(post);
-          res.send(post);
-        } //Redirects to the login page ("index")
+          res.send(post); // Redirects to the login page ("index")
+        }
     });
 });
 

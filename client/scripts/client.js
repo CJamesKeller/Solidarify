@@ -2,6 +2,7 @@
 * @fileoverview Routes pages w/ resolves as applicable.
 * @author Christopher Keller
 */
+
 let myApp = angular.module("myApp", ["ngRoute", "xeditable"]);
 
 myApp.config(["$routeProvider", function($routeProvider ) {
@@ -26,11 +27,6 @@ myApp.config(["$routeProvider", function($routeProvider ) {
     .when("/register", {
       templateUrl: "/views/templates/register.html",
       controller: "RegisterController",
-      // resolve: {                                 //FIX THIS ***
-      //   permit : function(PermissionService) {
-      //     return PermissionService.canRegister;
-      //   }
-      // }
     })
     .when("/org", {
       templateUrl: "/views/templates/organization.html",
