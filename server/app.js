@@ -38,14 +38,17 @@ app.use(passport.session());
 
 
 // NODEMAILER
+console.log(process.ev.MAILADDR);
 if ( !process.env.MAILADDR ) {
   configVars = require("../config.json");
 }
 
+let emailSendingFrom = process.env.MAILADDR || configVars.emailAddress;
+
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: process.env.MAILADDR || configVars.emailAddress,
+        user: emailSendingFrom,
         pass: process.env.MAILPASS || configVars.password
     }
 });
@@ -53,7 +56,7 @@ app.post("/mail", function(req,res) {
     let mailer = req.body;
     let mailOptions = {
         // Formatted as: ' "NAME" EMAIL ' (w/single quotes, too)
-        from:     ' "Solidarify Admin" ' + configVars.emailAddress + ' ',
+        from:     ' "Solidarify Admin" ' + emailSendingFrom + ' ',
         to:       mailer.toEmail,
         subject:  mailer.subject,
         text:     mailer.message,

@@ -3,7 +3,7 @@
 * @author Christopher Keller
 */
 
-let express   = require("Express"),
+let express   = require("express"),
     router    = express.Router(),
     mongoose  = require("mongoose");
 
