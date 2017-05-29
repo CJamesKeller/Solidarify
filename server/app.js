@@ -38,7 +38,7 @@ app.use(passport.session());
 
 
 // NODEMAILER
-console.log(process.ev.MAILADDR);
+console.log(process.env.MAILADDR);
 if ( !process.env.MAILADDR ) {
   configVars = require("../config.json");
 }
