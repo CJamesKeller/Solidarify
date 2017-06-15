@@ -1,4 +1,4 @@
-# Solidarify
+# [Solidarify](http://www.solidarify.com/)
 
 ## Description
 
